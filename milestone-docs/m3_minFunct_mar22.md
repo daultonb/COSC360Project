@@ -1,11 +1,8 @@
 # Milestone 3 - Minimum Functionality
 ## Approx due date: March 22 (30%)
+### Server-side implementation complete
 
 ## Requirements
-
-> Server-side implementation complete
-
-Status: WIP, Assigned to: 
 
 > Server-side security
 
