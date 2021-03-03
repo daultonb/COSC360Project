@@ -17,7 +17,6 @@ Our project is going to be a DisscussionForum website for discussing games of al
 > Requirements list of what (at a minimum) your site will do (you will need to explore existing sites to understand their functional offerings). 
 You should be able to understand from reading this document exactly what a user/administrator will be able to do on the site.
      
-- [ ] Status: WIP, Assigned to: 
 
  
  Users will be able to:
