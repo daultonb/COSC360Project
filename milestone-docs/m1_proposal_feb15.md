@@ -20,18 +20,18 @@ You should be able to understand from reading this document exactly what a user/
 
  
  Users will be able to:
-  - Browse discussions without registering
-  - Search for posts by keyword without registering
-  - Register at the site by providing their name, e-mail and image
-  - Allow user login by providing user id and password
-  - Create and comment (specific for each project) when logged into the site
-  - Users are required to be able to view/edit their profile
-  - User password recovery (via email).
+  - View active threads, need to register to comment or post a new thread. All users can Like/Dislike a comment/thread
+  - Use the search bar in the nav to easily filter posts
+  - Signup form with account information and profle picture upload
+  - Login with email and password
+  - Post new threads, comment and make replies
+  - Can edit account information and profile picture
+  - Password recovery and security
 
 Administrators will be able to:
-- Search for user by name, email or post
-- Enable/disable users
-- Edit/remove posts
+- Filter accounts to find specific users on an admin dashboard
+- Ban/delete user accounts and posts
+- Edit existing posts to remove content
 
 
 - [ ] Status: WIP, Assigned to: 
