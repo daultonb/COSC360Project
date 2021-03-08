@@ -7,7 +7,7 @@
 > – this is the plan for what your site will look like)
 
  
-- [ ] Status: WIP, Assigned to: 
+- [x] Status: WIP, Assigned to: Damyn Filipuzzi
 
 > Organization of pages (How are pages linked? – site map)
 
