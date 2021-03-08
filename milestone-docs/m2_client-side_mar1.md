@@ -6,7 +6,7 @@
 > Layout document (Planned layout of your page in hardcopy/electronic copy showing elements, sizes, placement 
 > – this is the plan for what your site will look like)
 
- ![alt text](https://github.com/daultonb/COSC360Project/blob/main/graphics/pageLayout_v2.PNG)
+ ![alt text](https://github.com/daultonb/COSC360Project/blob/main/graphics/pageLayout_v2.png)
  
 - [x] Status: Complete, Assigned to: Daulton Baird
 
