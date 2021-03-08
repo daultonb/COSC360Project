@@ -9,15 +9,13 @@
 > Project description and details:
 > - Provide a description of the project you are going to undertake.
 
-Our project is going to be a Disscussion Forum website for discussing games of all types. It will feature a category filtering and 
-  an upvoting system similar to Reddit. It will also allow for users to upload picture/video content for all users to view. 
+Our project is going to be a Disscussion Forum website for discussing games of all types. It will feature a category/game filtering and 
+  an upvoting system similar to Reddit. It will also allow for users to upload picture/video content for all users to view.
 
 - [ ] Status: WIP, Assigned to: 
 
 > Requirements list of what (at a minimum) your site will do (you will need to explore existing sites to understand their functional offerings). 
 You should be able to understand from reading this document exactly what a user/administrator will be able to do on the site.
-     
-
  
  Users will be able to:
   - View active threads, need to register to comment or post a new thread. All users can Like/Dislike a comment/thread
@@ -28,6 +26,8 @@ You should be able to understand from reading this document exactly what a user/
   - Can edit account information and profile picture
   - Password recovery and security
   - View other users Roles/Games/Tags
+  - Add games to their profile 
+  - Show game stats on their profile
 
 Administrators will be able to:
 - Filter accounts to find specific users on an admin dashboard
