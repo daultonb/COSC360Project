@@ -9,8 +9,8 @@
 > Project description and details:
 > - Provide a description of the project you are going to undertake.
 
-Our project is going to be a DisscussionForum website for discussing games of all types. It will feature a category filtering and 
-  an upvoting system similar to Reddit.
+Our project is going to be a Disscussion Forum website for discussing games of all types. It will feature a category filtering and 
+  an upvoting system similar to Reddit. It will also allow for users to upload picture/video content for all users to view. 
 
 - [ ] Status: WIP, Assigned to: 
 
