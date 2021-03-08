@@ -27,6 +27,7 @@ You should be able to understand from reading this document exactly what a user/
   - Post new threads, comment and make replies
   - Can edit account information and profile picture
   - Password recovery and security
+  - View other users Roles/Games/Tags
 
 Administrators will be able to:
 - Filter accounts to find specific users on an admin dashboard
