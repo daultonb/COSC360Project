@@ -13,7 +13,7 @@
 
  ![alt text](https://github.com/daultonb/COSC360Project/blob/main/graphics/sitemap.PNG)
  
-- [ ] Status: WIP, Assigned to: 
+- [x] Status: WIP, Assigned to: 
 
 > Logic process (How will a user engage with site?): This needs to include all processes for how the user/admin will engage with site.
 
