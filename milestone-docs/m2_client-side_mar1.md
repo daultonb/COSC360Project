@@ -11,6 +11,7 @@
 
 > Organization of pages (How are pages linked? – site map)
 
+ ![alt text](https://github.com/daultonb/COSC360Project/blob/main/graphics/sitemap.PNG)
  
 - [ ] Status: WIP, Assigned to: 
 
