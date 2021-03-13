@@ -21,19 +21,11 @@ exports.create = (req, res) => {
         });
         return;
     }
-    if (!inputData.date) {
-        //empty date
-        res.status(400).send({
-            message: "empty"
-        });
-        return;
-    }
 
     //All checks passed, create object
     const newPost = {
         title: inputData.title,
-        description: inputData.description,
-        date: inputData.date
+        description: inputData.description
     };
 
     //Save in the db
