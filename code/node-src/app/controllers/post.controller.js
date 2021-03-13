@@ -48,7 +48,7 @@ exports.findAll = (req, res) => {
 
     Post.findAll({ where: condition })
         .then(data => {
-            res.end(data);
+            res.send(data);
         })
         .catch(err => {
             res.status(500).send({
