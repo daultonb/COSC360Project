@@ -7,6 +7,7 @@ function Homepage() {
     const PageDiv = styled.div`
         background-color: #2b2b2b;
         height: 100vh;
+        margin-top: -10vh; 
     `;
 
     const GridCont = styled.div`

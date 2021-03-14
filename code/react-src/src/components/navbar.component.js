@@ -79,7 +79,7 @@ function NavBar() {
                     <Link to={"/"} css={{ textDecoration: "none"}}>Home</Link>
                 </GridItem1>
                 <GridItem1>
-                    <a>Categories</a>    
+                    <Link to={"/posts"} css={{ textDecoration: "none"}}>Categories</Link>
                 </GridItem1>
                 <GridItem2>
                     <SearchBar type= "text" placeholder="Search"/>
