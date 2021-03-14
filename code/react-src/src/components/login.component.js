@@ -61,13 +61,12 @@ function Login() {
                     <LoginInput type="text" placeholder="Enter Username" />
                     <LoginParagraph>Password</LoginParagraph>
                     <LoginInput type="text" placeholder="Enter Password" />
-                    {!register &&
+                    {!register ?
                         <div>
                             <LoginButton type="submit" value="Login"></LoginButton>
                             <p><a href="#" onClick={() => setRegister(true)}>Register</a></p>
                         </div>
-                    }
-                    {register &&
+                        :
                         <div>
                             <LoginParagraph>Re-Enter Password</LoginParagraph>
                             <LoginInput type="text" placeholder="Enter Password"></LoginInput>
@@ -77,12 +76,10 @@ function Login() {
                             <LoginInput type="text" placeholder="Enter Your Last Name"></LoginInput>
                             <LoginParagraph>Email</LoginParagraph>
                             <LoginInput type="text" placeholder="Enter Email Address"></LoginInput>
-                            <LoginButton type="submit" value="Register" onClick={() => { isRegisterDataValid ? setRegister(false) : setRegister(true)}}></LoginButton>
+                            <LoginButton type="submit" value="Register" onClick={() => { isRegisterDataValid ? setRegister(false) : setRegister(true) }}></LoginButton>
                             <p><a href="#" onClick={() => setRegister(false)}>Back to Login</a></p>
                         </div>
-
                     }
-
                 </LoginFormElement>
             </LoginForm>
 

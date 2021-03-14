@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled';
-/** @jsxImportSource @emotion/react */
+
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 function Homepage() {
+    const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
+    const posts = useStoreState((state) => state.posts);
+
+    useEffect(() => {
+        fetchPosts();
+    }, []);
 
     const PageDiv = styled.div`
         background-color: #2b2b2b;
@@ -19,7 +26,7 @@ function Homepage() {
         padding-top: 68px;
         padding-left: 0px;
     `;
-    
+
     const SidebarCont = styled.div`
         background-color: #c5c5c8;
         width: 15vw;
@@ -38,14 +45,16 @@ function Homepage() {
         height: 86vh;
         display: inline-block;
         margin-top: 5vh;
+        overflow-y: scroll;
     `;
 
-    //inline css
-    //css={{ backgroundColor: 'green'}}
+    const PostContent = styled.div`
+        background-color: rgba(0, 0, 0, 0.15);
+    `;
 
     return (
         <PageDiv>
-                <GridCont>
+            <GridCont>
                 <SidebarCont>
                     <ContentArea>
                         <h3>Sidebar</h3>
@@ -54,9 +63,15 @@ function Homepage() {
                 </SidebarCont>
                 <PostCont>
                     <ContentArea>
-                        <h1>Post!</h1>
-                        <p>This is in the main</p>
-                    </ContentArea>  
+                        {posts && posts.map((post, index) => {
+                            return <PostContent key={index}>
+                                <h1>{post.title}</h1>
+                                <p>{post.description}</p>
+                                <p>{post.username}</p>
+                                <p>{post.createdAt}</p>
+                            </PostContent>;
+                        })}
+                    </ContentArea>
                 </PostCont>
             </GridCont>
         </PageDiv>
