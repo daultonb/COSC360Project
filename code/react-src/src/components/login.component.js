@@ -47,7 +47,8 @@ function Login() {
     const LoginHeader = styled.h1`
         font-weight: bold;
         text-align: center;
-        color:black;    
+        color:black;  
+        margin-top: 10vh;  
     `;
 
 
