@@ -10,34 +10,35 @@
  
 - [x] Status: Complete, Assigned to: Daulton Baird
 
+
 > Organization of pages (How are pages linked? – site map)
 
  ![alt text](https://github.com/daultonb/COSC360Project/blob/main/graphics/sitemap.PNG)
  
 - [x] Status: Complete, Assigned to: Damyn Filipuzzi
 
+
 > Logic process (How will a user engage with site?): This needs to include all processes for how the user/admin will engage with site.
 
 ![alt text](https://github.com/daultonb/COSC360Project/blob/main/graphics/Logic_Process.PNG)
 
-- [x ] Status: Complete, Assigned to: Damyn Filipuzzi
+- [x] Status: Complete, Assigned to: Damyn Filipuzzi
 
 > Static design and styles of pages
 
+- [x] Status: WIP, Assigned to: Daulton
 
-- [ ] Status: WIP, Assigned to: Daulton
 
 > Examples of each page type (coded with ipsum lorem as a minimum)
 
+- [x] Status: WIP, Assigned to: Ross
 
-- [ ] Status: WIP, Assigned to: Ross
 
 > Client-side validation
 
-
 - [ ] Status: WIP, Assigned to: Ross
 
-> Client-side security
 
+> Client-side security
 
 - [ ] Status: WIP, Assigned to: Ross
