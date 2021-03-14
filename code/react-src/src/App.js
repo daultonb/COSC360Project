@@ -4,6 +4,7 @@ import './App.css';
 
 import PostsList from './components/posts-list.component'
 import Login from './components/login.component';
+import Homepage from './components/homepage.component';
 
 function App() {
   return (
@@ -14,9 +15,8 @@ function App() {
       <Link to={"/posts"} className="linkTo">
         Posts
       </Link>
-
-      <Login />
-
+      <Homepage/>
+      
       <div className="testing">
         <Switch>
           <Route exact path={["/", "/posts"]} component={PostsList} />
