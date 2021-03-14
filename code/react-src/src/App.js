@@ -9,19 +9,11 @@ import Homepage from './components/homepage.component';
 function App() {
   return (
     <div className="App">
-      Testing.
-      Learn React
-
-      <Link to={"/posts"} className="linkTo">
-        Posts
-      </Link>
-      <Homepage/>
-      
-      <div className="testing">
-        <Switch>
-          <Route exact path={["/", "/posts"]} component={PostsList} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path={["/"]} component={Homepage} />
+        <Route exact path={["/posts"]} component={PostsList} />
+        <Route exact path={["/login"]} component={Login} />
+      </Switch>
     </div>
   );
 }
