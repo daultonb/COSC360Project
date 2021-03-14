@@ -1,37 +1,46 @@
-import React, {useState, useEffect} from 'react'
-import PostsDataService from '../services/posts.service';
+import React, {useEffect} from 'react'
+import styled from '@emotion/styled';
+
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 function PostsList() {
-
-    const [posts, setPosts] = useState([]);
-
+    const savePost = useStoreActions((actions) => actions.savePost);
+    const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
+    const posts = useStoreState((state) => state.posts);
+    
     useEffect(() => {
-        getPosts();
+        fetchPosts();
     }, []);
 
-    const getPosts = () => {
-        setPosts(JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]'));
-        // PostsDataService.getAll()
-        //     .then(res => {
-        //         setPosts(res.data);
-        //         console.log(res.data);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
-    }
+    const LoginInput = styled.input`
+        border-radius:5px;
+    `;
+
+    const SaveButton = styled.button`
+        border-radius:5px;
+        padding: 10px;
+    `;
 
     return (
         <div>
             <ul>
                 {posts && posts.map((post, index) => {
-                    return <li onClick={getPosts} className="post" key={index}>
+                    return <li onClick={fetchPosts} className="post" key={index}>
                         <h1>{post.title}</h1>
                         <p>{post.description}</p>
                         <p>{post.username}</p>
                         <p>{post.createdAt}</p>
                     </li>;
                 })}
+                
+                <SaveButton type="buttom" onClick={() => savePost({"title": "my post1", "description": "my post 2", "username": "ross"})} />
+
+                {posts && 
+                    <div>
+                        <h1>Testing</h1>
+                        <LoginInput></LoginInput>
+                    </div>
+                }
             </ul>
         </div>
     )

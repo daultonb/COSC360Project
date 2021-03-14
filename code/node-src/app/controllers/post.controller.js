@@ -25,7 +25,8 @@ exports.create = (req, res) => {
     //All checks passed, create object
     const newPost = {
         title: inputData.title,
-        description: inputData.description
+        description: inputData.description,
+        username: inputData.username
     };
 
     //Save in the db
