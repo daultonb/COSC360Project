@@ -14,17 +14,16 @@ function Homepage() {
 
     const PageDiv = styled.div`
         background-color: #2b2b2b;
-        height: 100vh;
-        padding-top: 0vh; 
+        padding-top: 4vh;
+        overflow-y: hidden;
+        overflow-x: hidden;
     `;
 
     const GridCont = styled.div`
         display: grid;
         grid-template-columns: auto auto;
         justify-content: space-evenly;
-        height: 80vh;
-        grid-gap: 33px;
-        padding-left: 0px;
+        grid-gap: 1vw;
     `;
 
     const ContentArea = styled.div`
@@ -34,14 +33,13 @@ function Homepage() {
     const PostCont = styled.div`
         background-color: white;
         width: 60vw;
-        height: 86vh;
         display: inline-block;
-        margin-top: 2vh;
-        overflow-y: scroll;
     `;
 
     const PostContent = styled.div`
         background-color: rgba(0, 0, 0, 0.15);
+        padding: 10px;
+        margin: 10px;
     `;
 
     return (
@@ -54,8 +52,8 @@ function Homepage() {
                             return <PostContent key={index}>
                                 <h1>{post.title}</h1>
                                 <p>{post.description}</p>
-                                <p>{post.username}</p>
-                                <p>{post.createdAt}</p>
+                                <p>User: {post.username}</p>
+                                <p>Time: {post.createdAt}</p>
                             </PostContent>;
                         })}
                     </ContentArea>

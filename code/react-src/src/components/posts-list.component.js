@@ -12,6 +12,12 @@ function PostsList() {
         fetchPosts();
     }, []);
 
+    const PageDiv = styled.div`
+        background-color: #2b2b2b;
+        height: 100vh;
+        padding-top: 2vh;
+    `;
+
     const LoginInput = styled.input`
         border-radius:5px;
     `;
@@ -22,7 +28,7 @@ function PostsList() {
     `;
 
     return (
-        <div>
+        <PageDiv>
             <ul>
                 {posts && posts.map((post, index) => {
                     return <li onClick={fetchPosts} className="post" key={index}>
@@ -42,7 +48,7 @@ function PostsList() {
                     </div>
                 }
             </ul>
-        </div>
+        </PageDiv>
     )
 }
 
