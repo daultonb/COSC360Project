@@ -1,14 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
+
 function Homepage() {
     const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
+    const fetchN = useStoreActions((actions) => actions.fetchNPosts);
+    const fetchTotal = useStoreActions((actions) => actions.fetchTotal);
+    const [hasMore, setHasMore] = useState(false);
+    const n = 5;
+    const [numPosts, setNumPosts] = useState(n);
     const posts = useStoreState((state) => state.posts);
+    const total = useStoreState((state) => state.total);
 
-    useEffect(() => {
-        fetchPosts();
+    const getNewPosts = ()=> {
+        console.log("Getting New Posts.");
+        console.log(total);
+        if(hasMore){
+            fetchN(numPosts);
+            setNumPosts(numPosts+n);
+            if(numPosts >= total){
+                console.log("numPosts===total");
+                console.log(total);
+                console.log(numPosts);
+                setHasMore(false);
+            }
+        }else{
+            console.log("hasMore is False");
+        }
+    }
+
+    useEffect(async() => {
+        await fetchTotal();
+        fetchN(numPosts);
+        console.log("fetches Complete.");
+        console.log(total);
     }, []);
 
     const PageDiv = styled.div`
@@ -45,7 +73,6 @@ function Homepage() {
         height: 86vh;
         display: inline-block;
         margin-top: 5vh;
-        overflow-y: scroll;
     `;
 
     const PostContent = styled.div`
@@ -63,14 +90,22 @@ function Homepage() {
                 </SidebarCont>
                 <PostCont>
                     <ContentArea>
-                        {posts && posts.map((post, index) => {
-                            return <PostContent key={index}>
-                                <h1>{post.title}</h1>
-                                <p>{post.description}</p>
-                                <p>{post.username}</p>
-                                <p>{post.createdAt}</p>
-                            </PostContent>;
+                        <InfiniteScroll
+                        dataLength={total}
+                        next={getNewPosts()}
+                        hasMore={hasMore}
+                        loader={<h3>Loading New Posts...</h3>}
+                        >
+                        {posts.map((post, index) => {
+                        return <PostContent key={index}>
+                            <h1>{post.title}</h1>
+                            <p>{post.description}</p>
+                            <p>{post.username}</p>
+                            <p>{post.createdAt}</p>
+                        </PostContent>;
                         })}
+                        </InfiniteScroll>
+                        
                     </ContentArea>
                 </PostCont>
             </GridCont>

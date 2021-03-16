@@ -44,11 +44,47 @@ exports.create = (req, res) => {
 // Retrieve all posts, optional title input
 exports.findAll = (req, res) => {
     const title = req.query.title;
+    const n = req.query.n;
+    const total = req.query.total;
+
     //This is adding a LIKE statement to the db call.
     let condition = title ? { title: { [Op.like]: `%$title}%` } } : null;
+    let limit = n? Number(n):null;
+    let order = n?[['updatedAt', 'DESC']]: null;
 
-    Post.findAll({ where: condition })
+    let options = {where: condition, limit: limit, order:order};
+    
+    
+    if(total){
+        Post.count()
         .then(data => {
+            console.log(data);
+            res.send({data});
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Unknown error."
+            });
+        });
+    }
+    else
+        Post.findAll(options)
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                });
+            });
+};
+
+// Retrieve all posts, optional title input
+/* attempt #1
+exports.findTotal = (req, res) => {
+    Post.count()
+        .then(data => {
+            console.log(data);
             res.send(data);
         })
         .catch(err => {
@@ -56,7 +92,9 @@ exports.findAll = (req, res) => {
                 message: err.message || "Unknown error."
             });
         });
-};
+    
+};*/
+
 
 // Find a single post with an id
 exports.findOne = (req, res) => {

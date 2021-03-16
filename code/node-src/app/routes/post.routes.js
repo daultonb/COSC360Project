@@ -12,6 +12,9 @@ module.exports = app => {
     // Retrieve a single post by id
     router.get("/:id", posts.findOne);
 
+     // Retrieve total num posts
+    // router.get("/total", posts.findTotal);
+
     // Update a post with id
     router.put("/:id", posts.update);
 
