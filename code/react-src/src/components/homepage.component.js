@@ -55,7 +55,7 @@ function Homepage() {
                                 <h1>{post.title}</h1>
                                 <p>{post.description}</p>
                                 <p>{post.username}</p>
-                                <p>{post.createdAt}</p>
+                                <p>{new Date(post.createdAt).toString()}</p>
                             </PostContent>;
                         })}
                     </ContentArea>

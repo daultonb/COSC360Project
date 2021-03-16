@@ -10,6 +10,7 @@ import NavBar from './components/navbar.component';
 import Footer from './components/footer.component';
 import Login from './components/login.component';
 import Homepage from './components/homepage.component';
+import CreatePost from './components/createPost.component';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path={["/"]} component={Homepage} />
           <Route exact path={["/posts"]} component={PostsList} />
           <Route exact path={["/login"]} component={Login} />
+          <Route exact path={["/createpost"]} component={CreatePost}/>
         </Switch>
       </div>
     </StoreProvider>

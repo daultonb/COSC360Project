@@ -94,7 +94,7 @@ function NavBar() {
                     <Link to={"/posts"} css={{ textDecoration: "none"}}>Genres</Link>
                 </TextGridItem>
                 <TextGridItem class="add">
-                    <Link to={"/posts"} css={{ textDecoration: "none"}}>+ Post</Link>
+                    <Link to={"/createpost"} css={{ textDecoration: "none"}}>+ Post</Link>
                 </TextGridItem>
                 <SearchGridItem>
                     <SearchBar type= "text" placeholder="Search"/>
