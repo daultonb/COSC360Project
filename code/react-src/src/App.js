@@ -7,6 +7,7 @@ import PostsStore from './stores/posts.store';
 
 import PostsList from './components/posts-list.component'
 import NavBar from './components/navbar.component';
+import Footer from './components/footer.component';
 import Login from './components/login.component';
 import Homepage from './components/homepage.component';
 

@@ -3,25 +3,23 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 
-function NavBar() {
+function Footer() {
     
-    const navHeight = 4;
+    const navHeight = 40.5;
 
-    const Navi = styled.nav`
+    const FooterDiv = styled.nav`
         background-color: grey;
-        height: ${navHeight}vh;
+        height: ${navHeight}px;
         width: 100vw;
         display: flex;
-        position: fixed;
-        top: 0;
+        bottom: 0;
         padding: 10px;
         a {
             text-decoration: none;
         }
         a, p {
             font-family: Arial;
-            position: relative;
-            font-size: 10vb;
+            font-size: 20pt;
             
         }
     `;
@@ -30,7 +28,7 @@ function NavBar() {
         display: grid;
         grid-template-columns: auto auto auto 550px auto;
         justify-content: space-evenly;
-        height: ${navHeight}vh;
+        height: ${navHeight}px;
         grid-gap: 1.5vw;
         padding-left: 2vw;
     `;
@@ -49,14 +47,6 @@ function NavBar() {
         height: 5vh;
         margin-left: 13.5vw;
     `;
-    const SearchBar = styled.input`
-        border: 1px solid black;
-        border-radius: 8px;
-        width: 100%;
-        height: 60%;
-        margin-top:0.5vh;
-        font-size: 18pt;
-    `;
     const GridItem3 = styled.div`
         width: 4vw;
         height: 5vh;
@@ -71,7 +61,7 @@ function NavBar() {
     //css={{ backgroundColor: 'green'}}
 
     return (
-        <Navi>
+        <FooterDiv>
             <GridCont>
                 <GridItem1>
                     <img src="https://media.2oceansvibe.com/wp-content/uploads/2014/08/o-DIRTY-BIRD-FRIED-CHICKEN-570.jpg" alt="Logo" />   
@@ -83,15 +73,14 @@ function NavBar() {
                     <Link to={"/posts"} css={{ textDecoration: "none"}}>Categories</Link>
                 </GridItem1>
                 <GridItem2>
-                    <SearchBar type= "text" placeholder="Search"/>
                 </GridItem2>
                 <GridItem3>
                 <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>
                 </GridItem3>
             </GridCont>
-        </Navi>
+        </FooterDiv>
     )
 }
 
 
-export default NavBar;
+export default Footer;
