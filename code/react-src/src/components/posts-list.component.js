@@ -5,8 +5,10 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 function PostsList() {
     const savePost = useStoreActions((actions) => actions.savePost);
+    const removePost = useStoreActions((actions) => actions.removePost);
     const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
     const posts = useStoreState((state) => state.posts);
+    
     
     useEffect(() => {
         fetchPosts();
@@ -14,8 +16,8 @@ function PostsList() {
 
     const PageDiv = styled.div`
         background-color: #2b2b2b;
-        height: 100vh;
         padding-top: 2vh;
+        min-height: 100vh;
     `;
 
     const LoginInput = styled.input`
@@ -36,10 +38,11 @@ function PostsList() {
                         <p>{post.description}</p>
                         <p>{post.username}</p>
                         <p>{post.createdAt}</p>
+                        <button onClick={() => removePost(post.id)}>Delete</button>
                     </li>;
                 })}
                 
-                <SaveButton type="buttom" onClick={() => savePost({"title": "my post1", "description": "my post 2", "username": "ross"})} />
+                <SaveButton type="button" onClick={() => savePost({"title": "my post1", "description": "my post 2", "username": "ross"})} />
 
                 {posts && 
                     <div>

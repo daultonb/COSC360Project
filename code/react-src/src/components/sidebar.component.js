@@ -7,8 +7,10 @@ function Sidebar() {
     const SidebarCont = styled.div`
         background-color: #c5c5c8;
         width: 15vw;
-        height: 80vh;
         display: inline-block;
+        position: fixed;
+        left: 0;
+        margin-left: 10vw;
     `;
 
     const ContentArea = styled.div`
@@ -23,6 +25,10 @@ function Sidebar() {
                 <SidebarCont>
                     <ContentArea>
                         <h3>Sidebar</h3>
+                        <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
                         <p>This is in the sidebar</p>
                     </ContentArea>
                 </SidebarCont>

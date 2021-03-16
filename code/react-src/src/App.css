@@ -1,5 +1,8 @@
 .App {
+    width: 100vw;
     margin-top: 4vh;
-    overflow-x: hidden;
-    overflow-y: hidden;
+
+}
+html {
+    min-height: 100vh;
 }

@@ -15,8 +15,8 @@ function Homepage() {
     const PageDiv = styled.div`
         background-color: #2b2b2b;
         padding-top: 4vh;
-        overflow-y: hidden;
-        overflow-x: hidden;
+        min-height: 100vh;
+        
     `;
 
     const GridCont = styled.div`
