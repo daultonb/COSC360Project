@@ -21,33 +21,43 @@ function NavBar() {
         a, p {
             font-family: Arial;
             position: relative;
-            font-size: 10vb;
+            font-size: 2.8vmin;
             
         }
     `;
 
     const GridCont = styled.div`
         display: grid;
-        grid-template-columns: auto auto auto 550px auto;
+        grid-template-columns: auto auto 10vw 0vw 27vw auto;
         justify-content: space-evenly;
         height: ${navHeight}vh;
-        grid-gap: 1.5vw;
-        padding-left: 2vw;
+        grid-gap: 2vw;
     `;
-
-    const GridItem1 = styled.div`
-        width: 4vw;
-        height: 5vh;
+    //Icon
+    const ImgGridItem = styled.div`
+        width: 3vw;
+        height: 4vh;
         img {
-            width: 30px;
+            width: 3vh;
         }
         margin-top: 0.5vh;
         align-content: center;
+        padding-left: 2vw;
     `;
-    const GridItem2 = styled.div`
+    //Text
+    const TextGridItem = styled.div`
+        width: 5vw;
+        height: 4vh;
+        margin-top: 0.5vh;
+        align-content: center;
+        padding-left: 0vw;
+        text-align: center;
+    `;
+    //SearchBar
+    const SearchGridItem = styled.div`
         width: 30vw;
         height: 5vh;
-        margin-left: 13.5vw;
+        margin-left: 5vw;
     `;
     const SearchBar = styled.input`
         border: 1px solid black;
@@ -57,12 +67,13 @@ function NavBar() {
         margin-top:0.5vh;
         font-size: 18pt;
     `;
-    const GridItem3 = styled.div`
+    //Login
+    const EndGridItem = styled.div`
         width: 4vw;
         height: 5vh;
         position: relative;
         right: 0;
-        margin-left: 40vw;
+        margin-left: 28vw;
         margin-top: 0.5vh;
 
     `;
@@ -73,21 +84,24 @@ function NavBar() {
     return (
         <Navi>
             <GridCont>
-                <GridItem1>
+                <ImgGridItem>
                     <img src="https://media.2oceansvibe.com/wp-content/uploads/2014/08/o-DIRTY-BIRD-FRIED-CHICKEN-570.jpg" alt="Logo" />   
-                </GridItem1>
-                <GridItem1>
+                </ImgGridItem>
+                <TextGridItem>
                     <Link to={"/"} css={{ textDecoration: "none"}}>Home</Link>
-                </GridItem1>
-                <GridItem1>
-                    <Link to={"/posts"} css={{ textDecoration: "none"}}>Categories</Link>
-                </GridItem1>
-                <GridItem2>
+                </TextGridItem>
+                <TextGridItem>
+                    <Link to={"/posts"} css={{ textDecoration: "none"}}>Genres</Link>
+                </TextGridItem>
+                <TextGridItem class="add">
+                    <Link to={"/posts"} css={{ textDecoration: "none"}}>+ Post</Link>
+                </TextGridItem>
+                <SearchGridItem>
                     <SearchBar type= "text" placeholder="Search"/>
-                </GridItem2>
-                <GridItem3>
+                </SearchGridItem>
+                <EndGridItem>
                 <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>
-                </GridItem3>
+                </EndGridItem>
             </GridCont>
         </Navi>
     )

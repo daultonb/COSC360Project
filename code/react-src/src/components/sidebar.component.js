@@ -10,7 +10,7 @@ function Sidebar() {
         justify-content: space-evenly;
         height: 80vh;
         grid-gap: 33px;
-        padding-top: 68px;
+        padding-top: 2vh;
         padding-left: 0px;
     `;
     

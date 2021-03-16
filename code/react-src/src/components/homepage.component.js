@@ -14,8 +14,8 @@ function Homepage() {
 
     const PageDiv = styled.div`
         background-color: #2b2b2b;
-        height: 105.7vh;
-        margin-top: -10vh; 
+        height: 100vh;
+        padding-top: 0vh; 
     `;
 
     const GridCont = styled.div`
@@ -24,16 +24,7 @@ function Homepage() {
         justify-content: space-evenly;
         height: 80vh;
         grid-gap: 33px;
-        padding-top: 68px;
         padding-left: 0px;
-    `;
-
-    const SidebarCont = styled.div`
-        background-color: #c5c5c8;
-        width: 15vw;
-        height: 80vh;
-        display: inline-block;
-        margin: auto;
     `;
 
     const ContentArea = styled.div`
@@ -45,7 +36,7 @@ function Homepage() {
         width: 60vw;
         height: 86vh;
         display: inline-block;
-        margin-top: 5vh;
+        margin-top: 2vh;
         overflow-y: scroll;
     `;
 
