@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled';
+import Sidebar from './sidebar.component';
 
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
@@ -14,7 +15,7 @@ function Homepage() {
     const PageDiv = styled.div`
         background-color: #2b2b2b;
         height: 100vh;
-        margin-top: -10vh; 
+        padding-top: 0vh; 
     `;
 
     const GridCont = styled.div`
@@ -23,16 +24,7 @@ function Homepage() {
         justify-content: space-evenly;
         height: 80vh;
         grid-gap: 33px;
-        padding-top: 68px;
         padding-left: 0px;
-    `;
-
-    const SidebarCont = styled.div`
-        background-color: #c5c5c8;
-        width: 15vw;
-        height: 80vh;
-        display: inline-block;
-        margin: auto;
     `;
 
     const ContentArea = styled.div`
@@ -44,7 +36,7 @@ function Homepage() {
         width: 60vw;
         height: 86vh;
         display: inline-block;
-        margin-top: 5vh;
+        margin-top: 2vh;
         overflow-y: scroll;
     `;
 
@@ -55,12 +47,7 @@ function Homepage() {
     return (
         <PageDiv>
             <GridCont>
-                <SidebarCont>
-                    <ContentArea>
-                        <h3>Sidebar</h3>
-                        <p>This is in the sidebar</p>
-                    </ContentArea>
-                </SidebarCont>
+                <Sidebar/>
                 <PostCont>
                     <ContentArea>
                         {posts && posts.map((post, index) => {
