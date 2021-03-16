@@ -1,5 +1,8 @@
 .App {
-    height: 100vh;
     width: 100vw;
-    margin-top: 40.5px;
+    margin-top: 4vh;
+
+}
+html {
+    min-height: 100vh;
 }
