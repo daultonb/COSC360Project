@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import Sidebar from './sidebar.component';
 
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
@@ -68,16 +68,6 @@ function Homepage() {
         padding-left: 0px;
     `;
 
-    const SidebarCont = styled.div`
-        background-color: #c5c5c8;
-        width: 15vw;
-        height: 85vh;
-        display: inline-block;
-        position: fixed;
-        left: 8vw;
-        top: 10vh;
-    `;
-
     const ContentArea = styled.div`
         margin: 10px;
     `;
@@ -93,6 +83,8 @@ function Homepage() {
 
     const PostContent = styled.div`
         background-color: rgba(0, 0, 0, 0.15);
+        padding: 10px;
+        margin: 10px;
     `;
     
     const JumpBtn = styled.button`
@@ -120,12 +112,7 @@ function Homepage() {
     return (
         <PageDiv>
             <GridCont ref={topRef}>
-                <SidebarCont>
-                    <ContentArea>
-                        <h3>Sidebar</h3>
-                        <p>This is in the sidebar</p>
-                    </ContentArea>
-                </SidebarCont>
+                <Sidebar/>
                 <PostsCont>
                     <ContentArea >
                         {posts.map((post, index) => {

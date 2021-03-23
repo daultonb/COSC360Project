@@ -7,6 +7,12 @@ function Login() {
     // Temp Varible Declared to be replaced with function to chack if the 
     const isRegisterDataValid = true;
 
+    const PageDiv = styled.div`
+        background-color: #2b2b2b;
+        height: 105vh;
+        padding-top: 2vh;
+    `;
+
     const LoginForm = styled.div`
         border: 3px solid #f1f1f1;
         margin: 0 auto;
@@ -47,13 +53,12 @@ function Login() {
     const LoginHeader = styled.h1`
         font-weight: bold;
         text-align: center;
-        color:black;  
-        margin-top: 10vh;  
+        color:white;   
     `;
 
 
     return (
-        <div>
+        <PageDiv>
             <LoginHeader>Login</LoginHeader>
             <LoginForm>
                 <LoginFormElement>
@@ -83,7 +88,7 @@ function Login() {
                 </LoginFormElement>
             </LoginForm>
 
-        </div>
+        </PageDiv>
     )
 }
 

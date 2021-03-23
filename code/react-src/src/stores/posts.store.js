@@ -10,6 +10,10 @@ const PostsStore = createStore({
         state.posts.push(payload);
     }),
 
+    deletePost: action((state, payload) => {
+        state.posts = state.posts.filter((post) => post.id !== payload);
+    }),
+
     setPosts: action((state, payload) => {
         state.posts = payload;
     }),
@@ -40,6 +44,11 @@ const PostsStore = createStore({
         actions.setTotal(data.data);
     }),
 
+    removePost: thunk(async (actions, payload) => {
+        //state.posts = JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]');
+        await PostsDataService.delete(payload);
+        actions.deletePost(payload);
+    }),
 
     savePost: thunk(async (actions, payload) => {
         const { data } = await PostsDataService.create(payload);
