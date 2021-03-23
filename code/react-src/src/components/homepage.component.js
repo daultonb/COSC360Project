@@ -54,6 +54,7 @@ function Homepage() {
                             return <PostContent key={index}>
                                 <h1>{post.title}</h1>
                                 <p>{post.description}</p>
+                                <img src={post.file}></img>
                                 <p>{post.username}</p>
                                 <p>{new Date(post.createdAt).toString()}</p>
                             </PostContent>;

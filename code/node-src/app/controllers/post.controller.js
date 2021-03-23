@@ -26,6 +26,7 @@ exports.create = (req, res) => {
     const newPost = {
         title: inputData.title,
         description: inputData.description,
+        data: inputData.file,
         username: inputData.username
     };
 

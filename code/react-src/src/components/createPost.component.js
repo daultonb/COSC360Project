@@ -13,25 +13,48 @@ function CreatePost() {
   }, []);
 
   const PageDiv = styled.div`
-    background-color: #2b2b2b;
-    height: 100vh;
-    padding-top: 2vh;
+    border: 3px solid #f1f1f1;
+    margin: 0 auto;
+    background-color: White;
+    color: black;
+    padding: 50px;
+    width: 400px;
   `;
 
-  const header1 = styled.h1`
-    padding: 100px;
-    margin: 100px;
+  const Header1 = styled.h1`
+    font-weight: bold;
+    text-align: center;
+    color:black;  
+    margin-top: 10vh;  
+  `;
+
+  const DescriptionInput = styled.textarea`
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 8px 0;
+    width: 90%;
+    height: 200px;
+    border-radius:5px;
+    resize: vertical;
   `;
 
   const InputField = styled.input`
-    margin: 5em;
-    border-radius: 5px;
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 8px 0;
+    width: 90%;
+    border-radius:5px;
   `;
 
-  const SaveButton = styled.button`
-    margin: 5px;
-    border-radius: 5px;
-    padding: 10px;
+  const Button = styled.input`
+    background-color: grey;
+    color: white;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    &:hover {
+        opacity: 0.7;
+    }
   `;
 
   const Paragraph = styled.p`
@@ -39,41 +62,50 @@ function CreatePost() {
     color: black;
   `;
 
+  var upload;
+
+  var loadFile = function(event) {
+    upload = document.getElementById('file');
+    upload.src = URL.createObjectURL(event.target.files[0]);
+  }
+
+  
+
   function fillData() {
     var title = document.getElementById("title").value;
     var desc = document.getElementById("desc").value;
-
+    
     savePost({
       title: title,
       description: desc,
+      file: upload.src,
       username: "ross",
       
     });
   }
 
   return (
-    <PageDiv>
-      {posts && (
+    <div>
+      <Header1>Create Post</Header1>
+      <PageDiv>
+        {posts && (
+          <div>
+            <Paragraph>Title</Paragraph>
+            <InputField type="text" id="title" placeholder="Enter Title"></InputField>
+
+            <Paragraph>Description</Paragraph>
+            <DescriptionInput type="text" id="desc" placeholder="Enter Description"></DescriptionInput>
+            <Paragraph>Add An Image or Video</Paragraph>
+            <input type="file" id="file" accept="image/*, video/*"></input>
+            
+          </div>
+        )}
         <div>
-          <h1>Create Post</h1>
-          <Paragraph>Title</Paragraph>
-          <InputField
-            type="text"
-            id="title"
-            placeholder="Enter Title"
-          ></InputField>
-
-          <Paragraph>Description</Paragraph>
-          <InputField
-            type="text"
-            id="desc"
-            placeholder="Enter Description"
-          ></InputField>
+          <Button type="submit" value="Create Post" onClick={() => fillData()}></Button>
+          <Button type="submit" value="Preview Post"></Button>
         </div>
-      )}
-
-      <SaveButton type="buttom" onClick={() => fillData()} />
-    </PageDiv>
+      </PageDiv>
+    </div>
   );
 }
 
