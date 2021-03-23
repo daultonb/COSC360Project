@@ -1,9 +1,12 @@
 import { createStore, action, thunk } from 'easy-peasy';
 import PostsDataService from '../services/posts.service';
+import AccountDataService from '../services/account.service';
 
-const PostsStore = createStore({
+const MainStore = createStore({
+    /*
+    POSTS
+    */
     posts: [],
-
 
     addPost: action((state, payload) => {
         state.posts.push(payload);
@@ -23,6 +26,33 @@ const PostsStore = createStore({
         const { data } = await PostsDataService.create(payload);
         actions.addPost(data);
     }),
+
+    /*
+    ACCOUNT
+    */
+    myAccount: {},
+
+    setAccount: action((state, payload) => {
+        localStorage.setItem('account', JSON.stringify(payload));
+        state.myAccount = payload;
+    }),
+
+    logout: action((state, payload) => {
+        localStorage.removeItem('account');
+        state.myAccount = {};
+    }),
+
+    createAccount: thunk(async (actions, payload) => {
+        const data = await AccountDataService.create(payload);
+        return data.data;
+    }),
+
+    login: thunk(async (actions, payload) => {
+        const data = await AccountDataService.login(payload);
+        const accountData = data.data;
+        if(accountData.token) actions.setAccount(accountData);
+        return accountData;
+    }),
 });
 
-export default PostsStore;
+export default MainStore;

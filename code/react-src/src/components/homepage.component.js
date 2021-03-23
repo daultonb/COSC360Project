@@ -6,6 +6,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 function Homepage() {
     const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
     const posts = useStoreState((state) => state.posts);
+    const logout = useStoreActions((actions) => actions.logout);
 
     useEffect(() => {
         fetchPosts();
@@ -63,6 +64,7 @@ function Homepage() {
                 </SidebarCont>
                 <PostCont>
                     <ContentArea>
+                        <a href="#" onClick={()=> logout()}>Logout</a>
                         {posts && posts.map((post, index) => {
                             return <PostContent key={index}>
                                 <h1>{post.title}</h1>

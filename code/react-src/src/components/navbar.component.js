@@ -85,7 +85,7 @@ function NavBar() {
                     <SearchBar type= "text" placeholder="Search"/>
                 </GridItem2>
                 <GridItem3>
-                <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>
+                    <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>
                 </GridItem3>
             </GridCont>
         </Navi>
