@@ -7,10 +7,11 @@ function Sidebar() {
     const SidebarCont = styled.div`
         background-color: #c5c5c8;
         width: 15vw;
+        height: 85vh;
         display: inline-block;
         position: fixed;
-        left: 0;
-        margin-left: 10vw;
+        left: 10vw;
+        top: 10vh;
     `;
 
     const ContentArea = styled.div`

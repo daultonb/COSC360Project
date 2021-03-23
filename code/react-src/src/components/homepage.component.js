@@ -14,7 +14,7 @@ function Homepage() {
     const [numPosts, setNumPosts] = useState(n);
     const posts = useStoreState((state) => state.posts);
     const total = useStoreState((state) => state.total);
-    const postHeight = 10;
+    const postHeight = 5;
     const topRef = useRef();
 
     function jumpFunction(){
@@ -54,7 +54,7 @@ function Homepage() {
 
     const PageDiv = styled.div`
         background-color: #2b2b2b;
-        height: 200vh;
+        
         margin-top: -10vh; 
     `;
 
@@ -62,22 +62,21 @@ function Homepage() {
         display: grid;
         grid-template-columns: auto auto;
         justify-content: space-evenly;
-        height: 80vh;
         grid-gap: 33px;
         padding-top: 68px;
-        padding-left: 0px;
     `;
 
     const ContentArea = styled.div`
         margin: 10px;
+        height: ${postHeight}vh;
     `;
 
     const PostsCont = styled.div`
         background-color: white;
-        width: 60vw;
-        height: ${postHeight}*${numPosts}+10vh;
+        width: 55vw;
+        height: ${postHeight}*${numPosts}vh;
         display: inline-block;
-        margin-left: 24vw;
+        margin-left: 5vw;
         margin-top: 5vh;
     `;
 
@@ -131,6 +130,5 @@ function Homepage() {
         </PageDiv>
     )
 }
-
 
 export default Homepage;
