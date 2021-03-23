@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import styled from "@emotion/styled";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -7,6 +7,8 @@ function CreatePost() {
   const savePost = useStoreActions((actions) => actions.savePost);
   const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
   const posts = useStoreState((state) => state.posts);
+
+  const[preview, setPreview] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -102,7 +104,7 @@ function CreatePost() {
         )}
         <div>
           <Button type="submit" value="Create Post" onClick={() => fillData()}></Button>
-          <Button type="submit" value="Preview Post"></Button>
+          <Button type="submit" value="Preview Post" onClick={() => setPreview(true)}></Button>
         </div>
       </PageDiv>
     </div>
