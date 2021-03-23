@@ -14,6 +14,12 @@ function Homepage() {
     const [numPosts, setNumPosts] = useState(n);
     const posts = useStoreState((state) => state.posts);
     const total = useStoreState((state) => state.total);
+    const postHeight = 10;
+    const topRef = useRef();
+
+    function jumpFunction(){
+        topRef.current.scrollIntoView({behavior: 'smooth'});
+    }
 
     const getNewPosts = ()=> {
         console.log("Getting New Posts.");
@@ -45,8 +51,6 @@ function Homepage() {
     useEffect(() => {
         fetchN(numPosts);
     }, [numPosts]);
-
-    const postHeight = 10;
 
     const PageDiv = styled.div`
         background-color: #2b2b2b;
@@ -90,12 +94,6 @@ function Homepage() {
     const PostContent = styled.div`
         background-color: rgba(0, 0, 0, 0.15);
     `;
-
-    const topRef = useRef();
-
-    function jumpFunction(){
-        topRef.current.scrollIntoView({behavior: 'smooth'});
-    }
     
     const JumpBtn = styled.button`
         width: 100px;
