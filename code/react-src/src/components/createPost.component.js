@@ -82,10 +82,6 @@ function CreatePost() {
     upload.src = URL.createObjectURL(event.target.files[0]);
   }
 
-  
-
-  
-
   function getDescription() {
     return document.getElementById("desc").value;
   }
