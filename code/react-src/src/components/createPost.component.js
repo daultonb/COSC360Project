@@ -84,18 +84,7 @@ function CreatePost() {
 
   
 
-  function insertData() {
-    var title = getTitle();
-    var desc = getDescription();
-    
-    
-      savePost({
-        title: title,
-        description: desc,
-        //file: upload,
-        username: "ross"
-      });   
-  }
+  
 
   function getDescription() {
     return document.getElementById("desc").value;
@@ -104,6 +93,19 @@ function CreatePost() {
   function getTitle() {
     return document.getElementById("title").value;
   }
+
+  function insertData() {
+    var title = getTitle();
+    var desc = getDescription();
+    
+    
+    savePost({
+      title: title,
+      description: desc,
+      //file: upload,
+      username: "ross",
+    });  
+  }
   
   return (
     
@@ -111,7 +113,7 @@ function CreatePost() {
       <Header1>Create Post</Header1>
       <PageDiv>
         {posts && (
-          <FORM>
+          <div>
             
             <Paragraph>Title</Paragraph>    
             <InputField type="text" id="title" placeholder="Enter Title"></InputField>
@@ -123,7 +125,7 @@ function CreatePost() {
             <Button type="submit" value="Create Post" onClick={() => insertData()}></Button>
             <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>
    
-          </FORM>
+          </div>
           
         )}
         
