@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from "@emotion/styled";
-
 import Popup from './Popup.component';
 
 
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 function CreatePost() {
+
   // Handles Popup Window state
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {
@@ -66,11 +66,13 @@ function CreatePost() {
     }
   `;
 
-  
-
   const Paragraph = styled.p`
     font-weight: bold;
     color: black;
+  `;
+
+  const FORM = styled.form`
+    
   `;
 
   var upload;
@@ -82,22 +84,19 @@ function CreatePost() {
 
   
 
-  function fillData(event) {
+  function insertData() {
     var title = getTitle();
     var desc = getDescription();
     
-    if (title != '' && desc != '') {
+    
       savePost({
         title: title,
         description: desc,
         //file: upload,
-        username: "ross",
-      });
-    } else {
-      // prevent defualt
-    }
-    
+        username: "ross"
+      });   
   }
+
   function getDescription() {
     return document.getElementById("desc").value;
   }
@@ -105,36 +104,35 @@ function CreatePost() {
   function getTitle() {
     return document.getElementById("title").value;
   }
-
+  
   return (
     
     <div>
       <Header1>Create Post</Header1>
       <PageDiv>
         {posts && (
-          <div>
-            <Paragraph>Title</Paragraph>
+          <FORM>
+            
+            <Paragraph>Title</Paragraph>    
             <InputField type="text" id="title" placeholder="Enter Title"></InputField>
-
             <Paragraph>Description</Paragraph>
             <DescriptionInput type="text" id="desc" placeholder="Enter Description"></DescriptionInput>
             <Paragraph>Add An Image or Video</Paragraph>
             <input type="file" id="file" accept="image/*, video/*"></input>
-            
-          </div>
-        )}
-        <div>
-          <Button type="submit" value="Create Post" onClick={() => fillData()}></Button>
-          <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>
+                  
+            <Button type="submit" value="Create Post" onClick={() => insertData()}></Button>
+            <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>
+   
+          </FORM>
           
-        </div>
+        )}
+        
         
       </PageDiv>
       {isOpen && <Popup
       content={<>
         <b>{getTitle()}</b>
         <p>{getDescription()}</p>
-        
       </>}
       handleClose={togglePopup}
     />}
