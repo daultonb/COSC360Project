@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from "@emotion/styled";
 
+import Popup from './Popup.component';
+
+
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 function CreatePost() {
+  // Handles Popup Window state
+  const [isOpen, setIsOpen] = useState(false);
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+
   const savePost = useStoreActions((actions) => actions.savePost);
   const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
   const posts = useStoreState((state) => state.posts);
-
-  const[preview, setPreview] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -59,6 +66,8 @@ function CreatePost() {
     }
   `;
 
+  
+
   const Paragraph = styled.p`
     font-weight: bold;
     color: black;
@@ -73,20 +82,32 @@ function CreatePost() {
 
   
 
-  function fillData() {
-    var title = document.getElementById("title").value;
-    var desc = document.getElementById("desc").value;
+  function fillData(event) {
+    var title = getTitle();
+    var desc = getDescription();
     
-    savePost({
-      title: title,
-      description: desc,
-      file: upload.src,
-      username: "ross",
-      
-    });
+    if (title != '' && desc != '') {
+      savePost({
+        title: title,
+        description: desc,
+        //file: upload,
+        username: "ross",
+      });
+    } else {
+      // prevent defualt
+    }
+    
+  }
+  function getDescription() {
+    return document.getElementById("desc").value;
+  }
+
+  function getTitle() {
+    return document.getElementById("title").value;
   }
 
   return (
+    
     <div>
       <Header1>Create Post</Header1>
       <PageDiv>
@@ -104,9 +125,19 @@ function CreatePost() {
         )}
         <div>
           <Button type="submit" value="Create Post" onClick={() => fillData()}></Button>
-          <Button type="submit" value="Preview Post" onClick={() => setPreview(true)}></Button>
+          <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>
+          
         </div>
+        
       </PageDiv>
+      {isOpen && <Popup
+      content={<>
+        <b>{getTitle()}</b>
+        <p>{getDescription()}</p>
+        
+      </>}
+      handleClose={togglePopup}
+    />}
     </div>
   );
 }
