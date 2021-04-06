@@ -4,6 +4,14 @@ class PostsDataService {
     getAll() {
         return http.get('/posts');
     }
+    /* length-n to length-1 posts by id*/
+    getN(n) {
+        return http.get(`/posts?n=${n}`);
+    }
+    
+    getTotal() {
+        return http.get(`/posts?total=true`);
+    }
 
     get(id) {
         return http.get(`/posts/${id}`);

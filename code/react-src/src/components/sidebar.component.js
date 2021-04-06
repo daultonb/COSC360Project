@@ -3,23 +3,15 @@ import styled from '@emotion/styled';
 /** @jsxImportSource @emotion/react */
 
 function Sidebar() {
-
-    const GridCont = styled.div`
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: space-evenly;
-        height: 80vh;
-        grid-gap: 33px;
-        padding-top: 2vh;
-        padding-left: 0px;
-    `;
     
     const SidebarCont = styled.div`
         background-color: #c5c5c8;
         width: 15vw;
-        height: 80vh;
+        height: 85vh;
         display: inline-block;
-        margin: auto;
+        position: fixed;
+        left: 10vw;
+        top: 10vh;
     `;
 
     const ContentArea = styled.div`
@@ -31,14 +23,16 @@ function Sidebar() {
 
     return (
         <div>
-                <GridCont>
                 <SidebarCont>
                     <ContentArea>
                         <h3>Sidebar</h3>
                         <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
+                        <p>This is in the sidebar</p>
                     </ContentArea>
                 </SidebarCont>
-            </GridCont>
         </div>
     )
 }

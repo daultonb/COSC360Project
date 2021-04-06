@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 
 function NavBar() {
-    
-    const navHeight = 4;
 
     const Navi = styled.nav`
         background-color: grey;
-        height: ${navHeight}vh;
+        height: 4vh;
         width: 100vw;
         display: flex;
         position: fixed;
@@ -30,7 +28,7 @@ function NavBar() {
         display: grid;
         grid-template-columns: auto auto 10vw 0vw 27vw auto;
         justify-content: space-evenly;
-        height: ${navHeight}vh;
+        height: 4vh;
         grid-gap: 2vw;
     `;
     //Icon
@@ -65,7 +63,7 @@ function NavBar() {
         width: 100%;
         height: 60%;
         margin-top:0.5vh;
-        font-size: 18pt;
+        font-size: 2.5vmin;
     `;
     //Login
     const EndGridItem = styled.div`
