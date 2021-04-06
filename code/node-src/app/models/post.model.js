@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       username: {
         type: Sequelize.STRING
+      },
+      data: {
+        type: Sequelize.BLOB('long')
       }
     });
   

@@ -112,15 +112,16 @@ function Homepage() {
         <PageDiv>
             <GridCont ref={topRef}>
                 <Sidebar/>
-                <PostsCont>
-                    <ContentArea >
-                        {posts.map((post, index) => {
-                        return <PostContent key={index}>
-                            <h1>{post.title}</h1>
-                            <p>{post.description}</p>
-                            <p>{post.username}</p>
-                            <p>{post.createdAt}</p>
-                        </PostContent>;
+                <PostCont>
+                    <ContentArea>
+                        {posts && posts.map((post, index) => {
+                            return <PostContent key={index}>
+                                <h1>{post.title}</h1>
+                                <p>{post.description}</p>
+                                <img src={post.file}></img>
+                                <p>{post.username}</p>
+                                <p>{new Date(post.createdAt).toString()}</p>
+                            </PostContent>;
                         })}
                         <LoadBtn onClick={getNewPosts}>Load More</LoadBtn>
                         <JumpBtn onClick={jumpFunction}>Back to top</JumpBtn>
