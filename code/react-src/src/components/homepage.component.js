@@ -118,8 +118,8 @@ function Homepage() {
                     <ContentArea>
                         <a href="#" onClick={()=> logout()}>Logout</a>
                         {posts && posts.map((post, index) => {
-                            const mimeType = post.data.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-                            const postMedia = mimeType.indexOf("image") ? <video src={post.data} controls width="400"></video> : <img src={post.data}></img>;
+                            const mimeType = post.data?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+                            const postMedia = mimeType?.indexOf("image") ? <video src={post.data} controls width="400"></video> : <img src={post.data}></img>;
                             return <PostContent key={index}>
                                 <h1>{post.title}</h1>
                                 <p>{post.description}</p>
