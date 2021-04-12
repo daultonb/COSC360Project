@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled';
 import Sidebar from './sidebar.component';
+import Posts from './post.component';
 
 import { useStoreActions, useStoreState } from 'easy-peasy';
+
 
 
 function Homepage() {
@@ -82,11 +84,7 @@ function Homepage() {
         margin-top: 5vh;
     `;
 
-    const PostContent = styled.div`
-        background-color: rgba(0, 0, 0, 0.15);
-        padding: 10px;
-        margin: 10px;
-    `;
+    
     
     const JumpBtn = styled.button`
         width: 100px;
@@ -110,6 +108,31 @@ function Homepage() {
         margin: 15px;
     `;
 
+const PostContent = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+background-color: rgba(0, 0, 0, 0.15);
+padding: 10px;
+margin: 10px;
+`;
+
+const PostTitle = styled.h1` 
+
+`;
+
+const PostDescription = styled.p` 
+
+`;
+
+const PostUsername = styled.p` 
+align-items: flex-start;
+`;
+
+const PostDate = styled.p` 
+align-items: flex-start;
+`;
+
     return (
         <PageDiv>
             <GridCont ref={topRef}>
@@ -117,17 +140,7 @@ function Homepage() {
                 <PostsCont>
                     <ContentArea>
                         <a href="#" onClick={()=> logout()}>Logout</a>
-                        {posts && posts.map((post, index) => {
-                            const mimeType = post.data?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-                            const postMedia = mimeType?.indexOf("image") ? <video src={post.data} controls width="400"></video> : <img src={post.data}></img>;
-                            return <PostContent key={index}>
-                                <h1>{post.title}</h1>
-                                <p>{post.description}</p>
-                                {postMedia}
-                                <p>{post.username}</p>
-                                <p>{new Date(post.createdAt).toString()}</p>
-                            </PostContent>;
-                        })}
+                        <Posts/>
                         <LoadBtn onClick={getNewPosts}>Load More</LoadBtn>
                         <JumpBtn onClick={jumpFunction}>Back to top</JumpBtn>
                     </ContentArea>
