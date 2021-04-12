@@ -28,7 +28,7 @@ function CreatePost() {
     )
   }
 
-  const accountData = localStorage.getItem('account');
+  const accountData = JSON.parse(localStorage.getItem('account')).account;
   const username = accountData.username;
 
   const PageDiv = styled.div`
