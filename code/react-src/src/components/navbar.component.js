@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
 /** @jsxImportSource @emotion/react */
 
 function NavBar() {
+
+    const myaccount = useStoreState((state) => state.myAccount);
 
     const Navi = styled.nav`
         background-color: grey;
@@ -79,10 +84,10 @@ function NavBar() {
     
     //Check login.
     var checkLoggedIn = "";
-    if (!localStorage.getItem('account')) {
-        checkLoggedIn = "Login";
+    if (Object.keys(myaccount).length === 0) {
+        checkLoggedIn = <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>;
     }else{
-        checkLoggedIn = "My Account";
+        checkLoggedIn = <Link to={"/myaccount"}css={{ textDecoration: "none"}}>My Account</Link>;
     }
 
 
@@ -108,7 +113,7 @@ function NavBar() {
                     <SearchBar type= "text" placeholder="Search"/>
                 </SearchGridItem>
                 <EndGridItem>
-                <Link to={"/login"}css={{ textDecoration: "none"}}>{checkLoggedIn}</Link>
+                    <Link to={"/login"}css={{ textDecoration: "none"}}>{checkLoggedIn}</Link>
                 </EndGridItem>
             </GridCont>
         </Navi>
