@@ -8,9 +8,10 @@ function Posts() {
     const posts = useStoreState((state) => state.posts);
 
     const PostContent = styled.div`
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-evenly;
+        grid-gap: 33px;
         background-color: rgba(0, 0, 0, 0.15);
         padding: 10px;
         margin: 10px;
@@ -25,11 +26,11 @@ function Posts() {
     `;
 
     const PostUsername = styled.p` 
-    align-items: flex-start;
+        
     `;
 
     const PostDate = styled.p` 
-    align-items: flex-start;
+        
     `;
 
 return (
