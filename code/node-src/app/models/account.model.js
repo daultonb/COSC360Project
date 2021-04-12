@@ -20,7 +20,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT
       },
       avatar: {
-        type: Sequelize.BLOB('long')
+        type: Sequelize.BLOB('long'),
+        get() {
+          return this.getDataValue('data')?.toString('utf8');
+        },
       }
     }, {
       defaultScope: {

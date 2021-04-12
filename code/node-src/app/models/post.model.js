@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       username: {
         type: Sequelize.STRING
@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       data: {
         type: Sequelize.BLOB('long'),
         get() {
-          return this.getDataValue('data')?.toString('utf8'); // or whatever encoding is right
+          return this.getDataValue('data')?.toString('utf8');
         },
       }
     });
