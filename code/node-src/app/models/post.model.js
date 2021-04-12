@@ -11,7 +11,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       data: {
-        type: Sequelize.BLOB('long')
+        type: Sequelize.BLOB('long'),
+        get() {
+          return this.getDataValue('data')?.toString('utf8'); // or whatever encoding is right
+        },
       }
     });
   

@@ -21,6 +21,16 @@ function CreatePost() {
     fetchPosts();
   }, []);
 
+  //Check login.
+  if (!localStorage.getItem('account')) {
+    return (
+      <div>You must be logged in to create posts.</div>
+    )
+  }
+
+  const accountData = localStorage.getItem('account');
+  const username = accountData.username;
+
   const PageDiv = styled.div`
     border: 3px solid #f1f1f1;
     margin: 0 auto;
@@ -75,11 +85,18 @@ function CreatePost() {
     
   `;
 
-  var upload;
+  var currentUpload;
+  var fileReader;
 
-  var loadFile = function(event) {
-    upload = document.getElementById('file');
-    upload.src = URL.createObjectURL(event.target.files[0]);
+  const readFile = (e) => {
+    const content = fileReader.result;
+    currentUpload = content;
+  }
+
+  const handleChooseFile = (file) => {
+    fileReader = new FileReader();
+    fileReader.onloadend = readFile;
+    fileReader.readAsDataURL(file);
   }
 
   function getDescription() {
@@ -94,14 +111,14 @@ function CreatePost() {
     var title = getTitle();
     var desc = getDescription();
     
-    
     savePost({
       title: title,
       description: desc,
-      //file: upload,
-      username: "ross",
+      file: currentUpload,
+      username: username,
     });  
   }
+
   
   return (
     
@@ -116,7 +133,7 @@ function CreatePost() {
             <Paragraph>Description</Paragraph>
             <DescriptionInput type="text" id="desc" placeholder="Enter Description"></DescriptionInput>
             <Paragraph>Add An Image or Video</Paragraph>
-            <input type="file" id="file" accept="image/*, video/*"></input>
+            <input type="file" id="file" accept="image/*, video/*" onChange={e => handleChooseFile(e.target.files[0])}></input>
                   
             <Button type="submit" value="Create Post" onClick={() => insertData()}></Button>
             <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>

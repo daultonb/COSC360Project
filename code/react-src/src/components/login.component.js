@@ -106,7 +106,7 @@ function Login() {
                     :
                     <div>
                         <LoginParagraph>Re-Enter Password</LoginParagraph>
-                        <LoginInput key="password2" type="text" placeholder="Enter Password" value={password2} onChange={(e) => setPassword2(e.target.value)}></LoginInput>
+                        <LoginInput key="password2" type="password" placeholder="Enter Password" value={password2} onChange={(e) => setPassword2(e.target.value)}></LoginInput>
                         <LoginParagraph>First Name</LoginParagraph>
                         <LoginInput key="first_name1" type="text" placeholder="Enter Your First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></LoginInput>
                         <LoginParagraph>Last Name</LoginParagraph>
