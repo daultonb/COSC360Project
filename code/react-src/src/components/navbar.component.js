@@ -96,10 +96,10 @@ function NavBar() {
                 </TextGridItem>
                 <SearchGridItem>
                     <SearchBar type= "text" placeholder="Search"/>
-                </GridItem2>
-                <GridItem3>
+                </SearchGridItem>
+                <EndGridItem>
                     <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>
-                </GridItem3>
+                </EndGridItem>
             </GridCont>
         </Navi>
     )
