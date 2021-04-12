@@ -14,6 +14,18 @@ function MyAccount() {
     const myaccount = useStoreState((state) => state.myAccount);
 
     const [isEditing, setIsEditing] = useState(false);
+    
+    var currentUpload;
+    var fileReader;
+    const readFile = (e) => {
+        const content = fileReader.result;
+        currentUpload = content;
+    }
+    const handleChooseFile = (file) => {
+        fileReader = new FileReader();
+        fileReader.onloadend = readFile;
+        fileReader.readAsDataURL(file);
+    }
 
 
 
@@ -36,7 +48,7 @@ function MyAccount() {
                 <p>First name: <input type="text" placeholder= {myaccount.account.first_name}></input></p>
                 <p>Last name: <input type="text" placeholder= {myaccount.account.last_name}></input></p>
                 <p>About: <input type="text" placeholder= {myaccount.account.about}></input></p>
-                <p>Avatar: <input type="text" placeholder={myaccount.account.avatar}></input></p>
+                <p>Avatar: <input type="file" id="file" accept="image/*" onChange={e => handleChooseFile(e.target.files[0])}></input></p>
                 <input type="submit" onClick={() => setIsEditing(!isEditing)}></input>
             </div>
             :
