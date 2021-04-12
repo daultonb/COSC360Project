@@ -24,7 +24,7 @@ function CreatePost() {
   //Check login.
   if (!localStorage.getItem('account')) {
     return (
-      <div>You must be logged in to create posts.</div>
+      <div><br></br>You must be logged in to create posts.</div>
     )
   }
 
@@ -127,7 +127,6 @@ function CreatePost() {
       <PageDiv>
         {posts && (
           <div>
-            
             <Paragraph>Title</Paragraph>    
             <InputField type="text" id="title" placeholder="Enter Title"></InputField>
             <Paragraph>Description</Paragraph>
@@ -137,7 +136,6 @@ function CreatePost() {
                   
             <Button type="submit" value="Create Post" onClick={() => insertData()}></Button>
             <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>
-   
           </div>
           
         )}
