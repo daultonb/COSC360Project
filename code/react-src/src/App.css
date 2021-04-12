@@ -16,7 +16,7 @@ html {
     top: 0;
     left: 0;
   }
-   
+
   .box {
     position: relative;
     width: 70%;
@@ -30,7 +30,7 @@ html {
     border: 1px solid #999;
     overflow: auto;
   }
-   
+  
   .close-icon {
     content: 'x';
     cursor: pointer;

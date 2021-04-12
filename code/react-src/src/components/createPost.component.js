@@ -111,12 +111,21 @@ function CreatePost() {
     var title = getTitle();
     var desc = getDescription();
     
+    if(title === ""){
+      alert("Posts need a title!");
+      return;
+    }else if(desc === ""){
+      alert("Posts need a description!");
+      return;
+    }
+
     savePost({
       title: title,
       description: desc,
       file: currentUpload,
       username: username,
     });  
+    alert("Your post was successfully created!");
   }
 
   
@@ -128,9 +137,9 @@ function CreatePost() {
         {posts && (
           <div>
             <Paragraph>Title</Paragraph>    
-            <InputField type="text" id="title" placeholder="Enter Title"></InputField>
+            <InputField type="text" id="title" placeholder="Enter Title" required></InputField>
             <Paragraph>Description</Paragraph>
-            <DescriptionInput type="text" id="desc" placeholder="Enter Description"></DescriptionInput>
+            <DescriptionInput type="text" id="desc" placeholder="Enter Description" required></DescriptionInput>
             <Paragraph>Add An Image or Video</Paragraph>
             <input type="file" id="file" accept="image/*, video/*" onChange={e => handleChooseFile(e.target.files[0])}></input>
                   
