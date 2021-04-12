@@ -108,31 +108,6 @@ function Homepage() {
         margin: 15px;
     `;
 
-const PostContent = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-background-color: rgba(0, 0, 0, 0.15);
-padding: 10px;
-margin: 10px;
-`;
-
-const PostTitle = styled.h1` 
-
-`;
-
-const PostDescription = styled.p` 
-
-`;
-
-const PostUsername = styled.p` 
-align-items: flex-start;
-`;
-
-const PostDate = styled.p` 
-align-items: flex-start;
-`;
-
     return (
         <PageDiv>
             <GridCont ref={topRef}>
