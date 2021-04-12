@@ -7,6 +7,7 @@ import MainStore from './stores/main.store';
 
 import PostsList from './components/posts-list.component'
 import NavBar from './components/navbar.component';
+import MyAccount from './components/myaccount.component';
 import Footer from './components/footer.component';
 import Login from './components/login.component';
 import Homepage from './components/homepage.component';
@@ -22,12 +23,8 @@ function App() {
           <Route exact path={["/"]} component={Homepage} />
           <Route exact path={["/posts"]} component={PostsList} />
           <Route exact path={["/createpost"]} component={CreatePost}/>
-          <Route exact path={["/login"]} render={props => {
-            if (!localStorage.getItem('account')) {
-              return <Login />;
-            }
-            return <div><br></br><h1>My account</h1></div>;
-          }} />
+          <Route exact path={["/login"]} component={Login}/>
+          <Route exact path={["/myaccount"]} component={MyAccount}/>
         </Switch>
       </div>
     </StoreProvider>
