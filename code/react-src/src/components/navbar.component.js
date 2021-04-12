@@ -9,6 +9,11 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 function NavBar() {
 
     const myaccount = useStoreState((state) => state.myAccount);
+    const checkLogin = useStoreActions((actions) => actions.checkLogin);
+
+    useEffect(() => {
+        checkLogin();
+    }, []);
 
     const Navi = styled.nav`
         background-color: grey;

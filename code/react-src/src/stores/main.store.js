@@ -84,6 +84,16 @@ const MainStore = createStore({
         if(accountData.token) actions.setAccount(accountData);
         return accountData;
     }),
+
+    checkLogin: thunk((actions, payload) => {
+        const loggedInUser = localStorage.getItem("account");
+        if (loggedInUser) {
+          const foundUser = JSON.parse(loggedInUser);
+          actions.setAccount(foundUser);
+          return true;
+        }
+        return false;
+    }),
 });
 
 export default MainStore;
