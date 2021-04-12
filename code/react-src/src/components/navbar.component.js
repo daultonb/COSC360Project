@@ -26,7 +26,7 @@ function NavBar() {
 
     const GridCont = styled.div`
         display: grid;
-        grid-template-columns: auto auto 10vw 0vw 27vw auto;
+        grid-template-columns: auto auto auto 5vw 23vw auto;
         justify-content: space-evenly;
         height: 4vh;
         grid-gap: 2vw;
@@ -44,11 +44,11 @@ function NavBar() {
     `;
     //Text
     const TextGridItem = styled.div`
-        width: 5vw;
+        width: 80px;
         height: 4vh;
         margin-top: 0.5vh;
         align-content: center;
-        padding-left: 0vw;
+        padding-left: 0.3vw;
         text-align: center;
     `;
     //SearchBar
@@ -67,7 +67,7 @@ function NavBar() {
     `;
     //Login
     const EndGridItem = styled.div`
-        width: 4vw;
+        width: 190px;
         height: 5vh;
         position: relative;
         right: 0;
@@ -75,6 +75,16 @@ function NavBar() {
         margin-top: 0.5vh;
 
     `;
+
+    
+    //Check login.
+    var checkLoggedIn = "";
+    if (!localStorage.getItem('account')) {
+        checkLoggedIn = "Login";
+    }else{
+        checkLoggedIn = "My Account";
+    }
+
 
     //inline css
     //css={{ backgroundColor: 'green'}}
@@ -98,7 +108,7 @@ function NavBar() {
                     <SearchBar type= "text" placeholder="Search"/>
                 </SearchGridItem>
                 <EndGridItem>
-                    <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>
+                <Link to={"/login"}css={{ textDecoration: "none"}}>{checkLoggedIn}</Link>
                 </EndGridItem>
             </GridCont>
         </Navi>
