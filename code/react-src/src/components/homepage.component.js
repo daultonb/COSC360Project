@@ -65,6 +65,7 @@ function Homepage() {
     const GridCont = styled.div`
         display: grid;
         grid-template-columns: auto auto;
+        
         justify-content: space-evenly;
         grid-gap: 33px;
         padding-top: 68px;
