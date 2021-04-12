@@ -9,6 +9,7 @@ function Homepage() {
     const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
     const fetchN = useStoreActions((actions) => actions.fetchNPosts);
     const fetchTotal = useStoreActions((actions) => actions.fetchTotal);
+    const logout = useStoreActions((actions) => actions.logout);
     const [hasMore, setHasMore] = useState(true);
     const n = 5;
     const [numPosts, setNumPosts] = useState(n);
@@ -39,6 +40,7 @@ function Homepage() {
             console.log("hasMore is False");
         }
     }
+    
 
     useEffect(() => {
         fetchTotal();
@@ -114,6 +116,7 @@ function Homepage() {
                 <Sidebar/>
                 <PostCont>
                     <ContentArea>
+                        <a href="#" onClick={()=> logout()}>Logout</a>
                         {posts && posts.map((post, index) => {
                             return <PostContent key={index}>
                                 <h1>{post.title}</h1>
