@@ -36,10 +36,10 @@ function NavBar() {
 
     const GridCont = styled.div`
         display: grid;
-        grid-template-columns: auto auto auto 5vw 23vw auto;
+        grid-template-columns: auto auto auto 5vw  35vw auto 0vw;
         justify-content: space-evenly;
         height: 4vh;
-        grid-gap: 2vw;
+        grid-gap: 1vw;
     `;
     //Icon
     const ImgGridItem = styled.div`
@@ -81,7 +81,7 @@ function NavBar() {
         height: 5vh;
         position: relative;
         right: 0;
-        margin-left: 28vw;
+        margin-left: 10vw;
         margin-top: 0.5vh;
 
     `;
@@ -117,6 +117,9 @@ function NavBar() {
                 <SearchGridItem>
                     <SearchBar type= "text" placeholder="Search"/>
                 </SearchGridItem>
+                <EndGridItem>
+                    <Link to={"/admin"} css={{ textDecoration: "none"}}>Admin</Link>
+                </EndGridItem>
                 <EndGridItem>
                     <Link to={"/login"}css={{ textDecoration: "none"}}>{checkLoggedIn}</Link>
                 </EndGridItem>
