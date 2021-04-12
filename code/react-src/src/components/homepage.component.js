@@ -112,7 +112,7 @@ function Homepage() {
         <PageDiv>
             <GridCont ref={topRef}>
                 <Sidebar/>
-                <PostCont>
+                <PostsCont>
                     <ContentArea>
                         {posts && posts.map((post, index) => {
                             return <PostContent key={index}>
