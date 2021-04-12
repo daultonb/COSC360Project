@@ -64,7 +64,7 @@ function Homepage() {
         display: grid;
         grid-template-columns: auto auto;
         justify-content: space-evenly;
-        grid-gap: 33px;
+        grid-gap: 10px;
         padding-top: 68px;
     `;
 
@@ -78,7 +78,7 @@ function Homepage() {
         width: 55vw;
         height: ${postHeight}*${numPosts}vh;
         display: inline-block;
-        margin-left: 5vw;
+        margin-left: 1vw;
         margin-top: 5vh;
     `;
 

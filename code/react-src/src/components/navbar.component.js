@@ -26,10 +26,10 @@ function NavBar() {
 
     const GridCont = styled.div`
         display: grid;
-        grid-template-columns: auto auto 10vw 0vw 27vw auto;
+        grid-template-columns: auto auto auto auto 27vw auto;
         justify-content: space-evenly;
         height: 4vh;
-        grid-gap: 2vw;
+        grid-gap: 4vw;
     `;
     //Icon
     const ImgGridItem = styled.div`
@@ -45,7 +45,7 @@ function NavBar() {
     //Text
     const TextGridItem = styled.div`
         width: 5vw;
-        height: 4vh;
+        height: 3.5vh;
         margin-top: 0.5vh;
         align-content: center;
         padding-left: 0vw;

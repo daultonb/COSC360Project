@@ -10,8 +10,8 @@ function Sidebar() {
         height: 85vh;
         display: inline-block;
         position: fixed;
-        left: 10vw;
-        top: 10vh;
+        left: 14vw;
+        top: 6.3vh;
     `;
 
     const ContentArea = styled.div`
