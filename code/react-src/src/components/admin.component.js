@@ -23,15 +23,7 @@ function Admin() {
         background-color: #2b2b2b;
         padding-top: 2vh;
         min-height: 100vh;
-    `;
-
-    const LoginInput = styled.input`
-        border-radius:5px;
-    `;
-
-    const SaveButton = styled.button`
-        border-radius:5px;
-        padding: 10px;
+        padding-bottom: 2vh;
     `;
 
     //SearchBar
@@ -66,14 +58,6 @@ function Admin() {
                     </li>;
                 })}
                 
-                <SaveButton type="button" onClick={() => savePost({"title": "my post1", "description": "my post 2", "username": "ross"})} />
-
-                {posts && 
-                    <div>
-                        <h1>Testing</h1>
-                        <LoginInput></LoginInput>
-                    </div>
-                }
             </ul>
         </PageDiv>
     )

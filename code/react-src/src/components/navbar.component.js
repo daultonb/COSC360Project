@@ -86,7 +86,14 @@ function NavBar() {
 
     `;
 
-    
+     //Check if user is admin
+    var checkAdmin = "";
+    if (myaccount.admin === true) {
+        checkAdmin = <Link to={"/admin"}css={{ textDecoration: "none"}}>Admin</Link>;
+    }else{
+        checkAdmin = "";
+    }
+
     //Check login.
     var checkLoggedIn = "";
     if (Object.keys(myaccount).length === 0) {
@@ -98,6 +105,9 @@ function NavBar() {
 
     //inline css
     //css={{ backgroundColor: 'green'}}
+
+
+    // <img src="../resources/newPost_200.png" alt="Create a Post" />
 
     return (
         <Navi>
@@ -112,16 +122,16 @@ function NavBar() {
                     <Link to={"/posts"} css={{ textDecoration: "none"}}>Genres</Link>
                 </TextGridItem>
                 <TextGridItem class="add">
-                    <Link to={"/createpost"} css={{ textDecoration: "none"}}>+ Post</Link>
+                <Link to={"/createpost"} css={{ textDecoration: "none"}}>+ Post</Link>
                 </TextGridItem>
                 <SearchGridItem>
                     <SearchBar type= "text" placeholder="Search"/>
                 </SearchGridItem>
                 <EndGridItem>
-                    <Link to={"/admin"} css={{ textDecoration: "none"}}>Admin</Link>
+                    {checkAdmin}
                 </EndGridItem>
                 <EndGridItem>
-                    <Link to={"/login"}css={{ textDecoration: "none"}}>{checkLoggedIn}</Link>
+                    {checkLoggedIn}
                 </EndGridItem>
             </GridCont>
         </Navi>

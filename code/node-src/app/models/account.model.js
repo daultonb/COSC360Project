@@ -19,6 +19,9 @@ module.exports = (sequelize, Sequelize) => {
       about: {
         type: Sequelize.TEXT
       },
+      admin: {
+        type: Sequelize.BOOLEAN
+      },
       avatar: {
         type: Sequelize.BLOB('long'),
         get() {
