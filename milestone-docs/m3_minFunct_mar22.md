@@ -5,31 +5,24 @@
 ## Requirements
 
 > Server-side security
-
-
 - [ ] Status: WIP, Assigned to: 
 
-> Post storage/Discussion thread storage in database
 
-
-- [ ] Status: WIP, Assigned to: 
+> Post storage in database
+- [x] Status: Complete, Assigned to: Ross
+ 
  
 > Asynchronous updates
+- [x] Status: Complete 
 
-
-- [ ] Status: WIP, Assigned to: 
 
 > Database functionality complete
+- [x] Status: Complete, Assigned to: Ross
 
-
-- [ ] Status: WIP, Assigned to: 
 
 > Core functional components operational (see baseline objectives)
+- [x] Status: Complete
 
-
-- [ ] Status: WIP, Assigned to: 
 
 > Preliminary summary document, indicating implemented functionality
-
-
-- [ ] Status: WIP, Assigned to: 
+- [x] Status: Complete
