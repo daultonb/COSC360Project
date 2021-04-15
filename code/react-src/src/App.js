@@ -13,6 +13,7 @@ import Login from './components/login.component';
 import Homepage from './components/homepage.component';
 import CreatePost from './components/createPost.component';
 import Admin from './components/admin.component';
+import {PrivateRoute} from './components/functional-components/privateroute.component';
 
 
 function App() {
@@ -23,10 +24,10 @@ function App() {
         <Switch>
           <Route exact path={["/"]} component={Homepage} />
           <Route exact path={["/posts"]} component={PostsList} />
-          <Route exact path={["/createpost"]} component={CreatePost}/>
+          <PrivateRoute exact path={["/createpost"]} component={CreatePost}/>
           <Route exact path={["/login"]} component={Login}/>
-          <Route exact path={["/myaccount"]} component={MyAccount}/>
-          <Route exact path={["/admin"]} component={Admin}/>
+          <PrivateRoute exact path={["/myaccount"]} component={MyAccount}/>
+          <PrivateRoute exact path={["/admin"]} component={Admin}/>
         </Switch>
       </div>
     </StoreProvider>
