@@ -34,7 +34,7 @@
  ![Homepage](https://github.com/daultonb/COSC360Project/blob/main/graphics/M2_HomePage2_Mar13.png)
   ![Homepage](https://github.com/daultonb/COSC360Project/blob/main/graphics/M2_LoginPage_Mar13.png)
 
-- [x] Status: WIP, Assigned to: Ross
+- [x] Status: Complete, Assigned to: Ross
 
 
 > Client-side validation
