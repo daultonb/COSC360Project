@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from "@emotion/styled";
-import Popup from './style-components/Popup.component';
-
-
 import { useStoreActions, useStoreState } from "easy-peasy";
 
+import Button from './style-components/button.component';
+import Popup from './style-components/Popup.component';
 function CreatePost() {
 
   // Handles Popup Window state
@@ -63,17 +62,6 @@ function CreatePost() {
     margin: 8px 0;
     width: 90%;
     border-radius:5px;
-  `;
-
-  const Button = styled.input`
-    background-color: grey;
-    color: white;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    &:hover {
-        opacity: 0.7;
-    }
   `;
 
   const Paragraph = styled.p`
@@ -143,8 +131,8 @@ function CreatePost() {
             <Paragraph>Add An Image or Video</Paragraph>
             <input type="file" id="file" accept="image/*, video/*" onChange={e => handleChooseFile(e.target.files[0])}></input>
                   
-            <Button type="submit" value="Create Post" onClick={() => insertData()}></Button>
-            <Button type="submit" value="Preview Post" onClick={togglePopup}></Button>
+            <Button type={"submit"} text={"Create Post"} onClick={() => insertData()} width={"100%"}/>
+            <Button type={"submit"} text={"Preview Post"} onClick={togglePopup} width={"100%"}/>
           </div>
           
         )}

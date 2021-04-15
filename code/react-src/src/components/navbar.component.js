@@ -6,10 +6,14 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 /** @jsxImportSource @emotion/react */
 
+import Hyperlink from './style-components/hyperlink.component';
+import Searchbar from './style-components/searchbar.component';
+
 function NavBar() {
 
     const myaccount = useStoreState((state) => state.myAccount);
     const checkLogin = useStoreActions((actions) => actions.checkLogin);
+    const logout = useStoreActions((actions) => actions.logout);
 
     useEffect(() => {
         checkLogin();
@@ -36,7 +40,7 @@ function NavBar() {
 
     const GridCont = styled.div`
         display: grid;
-        grid-template-columns: auto auto auto 5vw  35vw auto 0vw;
+        grid-template-columns: auto auto auto 6vw  35vw auto auto 0vw;
         justify-content: space-evenly;
         height: 4vh;
         grid-gap: 1vw;
@@ -54,7 +58,7 @@ function NavBar() {
     `;
     //Text
     const TextGridItem = styled.div`
-        width: 80px;
+        width: 100px;
         height: 4vh;
         margin-top: 0.5vh;
         align-content: center;
@@ -67,21 +71,13 @@ function NavBar() {
         height: 5vh;
         margin-left: 5vw;
     `;
-    const SearchBar = styled.input`
-        border: 1px solid black;
-        border-radius: 8px;
-        width: 100%;
-        height: 60%;
-        margin-top:0.5vh;
-        font-size: 2.5vmin;
-    `;
     //Login
     const EndGridItem = styled.div`
-        width: 190px;
-        height: 5vh;
+        width: 150px;
+        height: 4vh;
         position: relative;
         right: 0;
-        margin-left: 10vw;
+        margin-left: 3vw;
         margin-top: 0.5vh;
 
     `;
@@ -89,17 +85,21 @@ function NavBar() {
      //Check if user is admin
     var checkAdmin = "";
     if (myaccount.account?.admin === true) {
-        checkAdmin = <Link to={"/admin"}css={{ textDecoration: "none"}}>Admin</Link>;
+        checkAdmin = <Link to={"/admin"}> <Hyperlink text={"Admin"}/></Link>;
     }else{
         checkAdmin = "";
     }
 
-    //Check login.
+    //Login validation.
+    var checkCanPost = "";
     var checkLoggedIn = "";
-    if (Object.keys(myaccount).length === 0) {
-        checkLoggedIn = <Link to={"/login"}css={{ textDecoration: "none"}}>Login</Link>;
-    }else{
-        checkLoggedIn = <Link to={"/myaccount"}css={{ textDecoration: "none"}}>My Account</Link>;
+    var checkLogout = "";
+    if (Object.keys(myaccount).length === 0) { //not logged in
+        checkLogout = <Link to={"/login"}><Hyperlink text={"Login"}/></Link>;
+    }else{ //logged in
+        checkCanPost = <Link to={"/createpost"}> <Hyperlink text={"+ Post"}/></Link>;
+        checkLoggedIn = <Link to={"/myaccount"}><Hyperlink text={"My Account"}/></Link>;
+        checkLogout = <Link onClick={()=> logout()}><Hyperlink text={"Logout"}/></Link>
     }
 
 
@@ -116,22 +116,25 @@ function NavBar() {
                     <img src="https://media.2oceansvibe.com/wp-content/uploads/2014/08/o-DIRTY-BIRD-FRIED-CHICKEN-570.jpg" alt="Logo" />   
                 </ImgGridItem>
                 <TextGridItem>
-                    <Link to={"/"} css={{ textDecoration: "none"}}>Home</Link>
+                    <Link to={"/"}><Hyperlink text={"Home"}/></Link>
                 </TextGridItem>
                 <TextGridItem>
-                    <Link to={"/posts"} css={{ textDecoration: "none"}}>Genres</Link>
+                    <Link to={"/posts"}><Hyperlink text={"Genres"}/></Link>
                 </TextGridItem>
                 <TextGridItem class="add">
-                <Link to={"/createpost"} css={{ textDecoration: "none"}}>+ Post</Link>
+                {checkCanPost}
                 </TextGridItem>
                 <SearchGridItem>
-                    <SearchBar type= "text" placeholder="Search"/>
+                    <Searchbar type= {"text"} placeholder={"Search"}/>
                 </SearchGridItem>
-                <EndGridItem>
+                <TextGridItem>
                     {checkAdmin}
-                </EndGridItem>
+                </TextGridItem>
                 <EndGridItem>
                     {checkLoggedIn}
+                </EndGridItem>
+                <EndGridItem>
+                    {checkLogout}
                 </EndGridItem>
             </GridCont>
         </Navi>

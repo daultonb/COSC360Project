@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled';
-
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
+import Button from './style-components/button.component';
 
 const Cont = styled.div`
-        padding-top: 50px;
-        padding-left: 50px;
+    padding-top: 50px;
+    padding-left: 50px;
 `;
 
 function MyAccount() {
 
     const myaccount = useStoreState((state) => state.myAccount);
-
     const [isEditing, setIsEditing] = useState(false);
     
     var currentUpload;
@@ -26,9 +25,6 @@ function MyAccount() {
         fileReader.onloadend = readFile;
         fileReader.readAsDataURL(file);
     }
-
-
-
 
     //Check login.
     if (!localStorage.getItem('account')) {
@@ -49,7 +45,7 @@ function MyAccount() {
                 <p>Last name: <input type="text" placeholder= {myaccount.account.last_name}></input></p>
                 <p>About: <input type="text" placeholder= {myaccount.account.about}></input></p>
                 <p>Avatar: <input type="file" id="file" accept="image/*" onChange={e => handleChooseFile(e.target.files[0])}></input></p>
-                <input type="submit" onClick={() => setIsEditing(!isEditing)}></input>
+                <Button text={"submit"} onClick={() => setIsEditing(!isEditing)}></Button>
             </div>
             :
             <div>
@@ -59,7 +55,7 @@ function MyAccount() {
             <p>Last name: {myaccount.account.last_name}</p>
             <p>About: {myaccount.account.about}</p>
             <p>Avatar: {myaccount.account.avatar}</p>
-            <button onClick={() => setIsEditing(!isEditing)}>Edit My Profile</button>
+            <Button onClick={() => setIsEditing(!isEditing)} text={"Edit My Profile"}/>
             </div>
             }
             

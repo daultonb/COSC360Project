@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled';
-
 import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import Button from './style-components/button.component';
 
 const LoginInput = styled.input`
     display: inline-block;
@@ -13,7 +14,7 @@ const LoginInput = styled.input`
 
 const PageDiv = styled.div`
     background-color: #2b2b2b;
-    height: 105vh;
+    height: 115vh;
     padding-top: 2vh;
 `;
 
@@ -24,10 +25,6 @@ const LoginForm = styled.div`
     color: black;
     padding: 50px;
     width: 400px;
-`;
-
-const LoginFormElement = styled.form`
-
 `;
 
 const LoginButton = styled.input`
@@ -49,8 +46,8 @@ const LoginParagraph = styled.p`
 const LoginHeader = styled.h1`
     font-weight: bold;
     text-align: center;
-    color:black;  
-    margin-top: 10vh;  
+    color:white;  
+    margin-top: 5vh;  
 `;
 
 function Login() {
@@ -100,8 +97,8 @@ function Login() {
                 <LoginInput key="password1" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 {!register ?
                     <div>
-                        <LoginButton type="submit" onClick={attemptLogin} value="Login"></LoginButton>
-                        <p><a href="#" onClick={() => setRegister(true)}>Register</a></p>
+                        <Button type={"submit"} onClick={attemptLogin} text={"Login"} width={"100%"}></Button>
+                        <Button onClick={() => setRegister(true)} text={"Register"} width={"100%"}/>
                     </div>
                     :
                     <div>
@@ -113,8 +110,8 @@ function Login() {
                         <LoginInput key="last_name1" type="text" placeholder="Enter Your Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></LoginInput>
                         <LoginParagraph>Email</LoginParagraph>
                         <LoginInput key="email1" type="text" placeholder="Enter Email Address" value={email} onChange={(e) => setEmail(e.target.value)}></LoginInput>
-                        <LoginButton type="submit" value="Register" onClick={attemptRegister}></LoginButton>
-                        <p><a href="#" onClick={() => setRegister(false)}>Back to Login</a></p>
+                        <Button type={"submit"} text={"Register"} onClick={attemptRegister}width={"100%"} />
+                        <Button onClick={() => setRegister(false)} text={"Back to Login"} width={"100%"}/>
                     </div>
                 }
             </LoginForm>

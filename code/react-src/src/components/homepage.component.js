@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled';
-import Sidebar from './style-components/sidebar.component';
-import Posts from './style-components/post.component';
-
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-
+import Button from './style-components/button.component';
+import Sidebar from './style-components/sidebar.component';
+import Posts from './style-components/post.component';
 
 function Homepage() {
     const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
     const fetchN = useStoreActions((actions) => actions.fetchNPosts);
     const fetchTotal = useStoreActions((actions) => actions.fetchTotal);
-    const logout = useStoreActions((actions) => actions.logout);
     const [hasMore, setHasMore] = useState(true);
     const n = 5;
     const [numPosts, setNumPosts] = useState(n);
@@ -25,17 +23,17 @@ function Homepage() {
     }
 
     const getNewPosts = ()=> {
-        console.log("Getting New Posts.");
-        console.log("total:",total);
+        //console.log("Getting New Posts.");
+        //console.log("total:",total);
         if(hasMore){
-            console.log("numPosts (pre):",numPosts);
+            //console.log("numPosts (pre):",numPosts);
             let postNum = numPosts + n;
             setNumPosts(postNum);
-            console.log("numPosts:",postNum)
+            //console.log("numPosts:",postNum)
             if(postNum >= total){
-                console.log("numPosts===total");
-                console.log(total);
-                console.log(numPosts);
+                //console.log("numPosts===total");
+                //console.log(total);
+                //console.log(numPosts);
                 setHasMore(false);
             }
         }else{
@@ -48,8 +46,8 @@ function Homepage() {
         fetchTotal();
         setNumPosts(n);
         fetchN(numPosts);
-        console.log("fetches Complete.");
-        console.log("useEffect total:",total);
+        //console.log("fetches Complete.");
+        //console.log("useEffect total:",total);
     }, []);
 
     useEffect(() => {
@@ -57,56 +55,45 @@ function Homepage() {
     }, [numPosts]);
 
     const PageDiv = styled.div`
-        background-color: #2b2b2b;
-        
-        margin-top: -10vh; 
+        background-color: white;
     `;
-
     const GridCont = styled.div`
         display: grid;
         grid-template-columns: auto auto;
-        
         justify-content: space-evenly;
         grid-gap: 33px;
-        padding-top: 68px;
+        
     `;
-
     const ContentArea = styled.div`
         margin: 10px;
         height: ${postHeight}vh;
     `;
-
     const PostsCont = styled.div`
         background-color: white;
         width: 55vw;
         height: ${postHeight}*${numPosts}vh;
         display: inline-block;
         margin-left: 5vw;
-        margin-top: 5vh;
+        margin-top: 3vh;
     `;
-
-    
     
     const JumpBtn = styled.button`
-        width: 100px;
-        height: 50px;
+        background-color: grey;
+        font-size: 1.7vmin;
+        color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        &:hover {
+            opacity: 0.7;
+        }
         float: right;
         right: 30px;
         bottom: 0;
-        background-color: grey;
         z-index: 1;
         position: fixed;
-        border: solid black 1px;
         
-    `;
-
-    const LoadBtn = styled.button`
-        width: 100px;
-        height: 50px;
-        float: left;
-        background-color: grey;
-        border: solid black 1px;
-        margin: 15px;
     `;
 
     return (
@@ -115,9 +102,8 @@ function Homepage() {
                 <Sidebar/>
                 <PostsCont>
                     <ContentArea>
-                        <a href="#" onClick={()=> logout()}>Logout</a>
                         <Posts/>
-                        <LoadBtn onClick={getNewPosts}>Load More</LoadBtn>
+                        <Button onClick={getNewPosts} text={"Load More"}/>
                         <JumpBtn onClick={jumpFunction}>Back to top</JumpBtn>
                     </ContentArea>
                 </PostsCont>

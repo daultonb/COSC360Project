@@ -16,6 +16,7 @@ function Button(props) {
         &:hover {
             opacity: 0.7;
         }
+
     `;
 
     //inline css
