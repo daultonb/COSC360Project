@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled';
-import Sidebar from './sidebar.component';
-import Posts from './post.component';
+import Sidebar from './style-components/sidebar.component';
+import Posts from './style-components/post.component';
 
 import { useStoreActions, useStoreState } from 'easy-peasy';
 

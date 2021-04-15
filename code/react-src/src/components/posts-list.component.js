@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react'
 import styled from '@emotion/styled';
-
 import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import Button from '././style-components/button.component';
+import Hyperlink from './style-components/hyperlink.component';
 
 function PostsList() {
     const savePost = useStoreActions((actions) => actions.savePost);
     const removePost = useStoreActions((actions) => actions.removePost);
     const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
     const posts = useStoreState((state) => state.posts);
-    
     
     useEffect(() => {
         fetchPosts();
@@ -31,6 +32,7 @@ function PostsList() {
 
     return (
         <PageDiv>
+            <Hyperlink href={"https://www.google.ca"} target={"_blank"} text={"Link to Google"}/>
             <ul>
                 {posts && posts.map((post, index) => {
                     return <li onClick={fetchPosts} className="post" key={index}>
@@ -38,12 +40,11 @@ function PostsList() {
                         <p>{post.description}</p>
                         <p>{post.username}</p>
                         <p>{post.createdAt}</p>
-                        <button onClick={() => removePost(post.id)}>Delete</button>
+                        <Button text={"Delete"} onClick={() => removePost(post.id)}/>
                     </li>;
                 })}
                 
                 <SaveButton type="button" onClick={() => savePost({"title": "my post1", "description": "my post 2", "username": "ross"})} />
-
                 {posts && 
                     <div>
                         <h1>Testing</h1>

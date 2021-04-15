@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from "@emotion/styled";
-import Popup from './Popup.component';
+import Popup from './style-components/Popup.component';
 
 
 import { useStoreActions, useStoreState } from "easy-peasy";
