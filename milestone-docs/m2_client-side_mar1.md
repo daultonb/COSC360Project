@@ -26,7 +26,7 @@
 
 > Static design and styles of pages
 
-- [x] Status: WIP, Assigned to: Daulton
+- [x] Status: Complete, Assigned to: Daulton
 
 
 > Examples of each page type (coded with ipsum lorem as a minimum)
@@ -39,9 +39,9 @@
 
 > Client-side validation
 
-- [ ] Status: WIP, Assigned to: Ross
+- [x] Status: Complete, Assigned to: Ross
 
 
 > Client-side security
 
-- [ ] Status: WIP, Assigned to: Ross
+- [x] Status: Complete, Assigned to: Ross
