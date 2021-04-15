@@ -88,7 +88,7 @@ function NavBar() {
 
      //Check if user is admin
     var checkAdmin = "";
-    if (myaccount.admin === true) {
+    if (myaccount.account?.admin === true) {
         checkAdmin = <Link to={"/admin"}css={{ textDecoration: "none"}}>Admin</Link>;
     }else{
         checkAdmin = "";
