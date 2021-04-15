@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from '@emotion/styled';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import Button from './style-components/button.component';
-
-const LoginInput = styled.input`
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 8px 0;
-    width: 90%;
-    border-radius:5px;
-`;
+import TextInput from './style-components/textinput.component';
+import Alert from './style-components/alert.component';
 
 const PageDiv = styled.div`
     background-color: #2b2b2b;
     height: 115vh;
-    padding-top: 2vh;
+    padding-top: 10vh;
 `;
 
 const LoginForm = styled.div`
@@ -25,17 +19,6 @@ const LoginForm = styled.div`
     color: black;
     padding: 50px;
     width: 400px;
-`;
-
-const LoginButton = styled.input`
-    background-color: grey;
-    color: white;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    &:hover {
-        opacity: 0.7;
-    }
 `;
 
 const LoginParagraph = styled.p`
@@ -62,39 +45,58 @@ function Login() {
     const [lastName, setLastName] = useState('');
     const [register, setRegister] = useState(false);
 
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+
+    const topRef = useRef();
+
+    function jumpFunction(){
+        topRef.current.scrollIntoView({behavior: 'smooth'});
+    }
+
     const attemptLogin = async () => {
         const data = await login({ username: username, password: password });
         console.log(data);
+        jumpFunction();
         if(data.token) {
-            alert("logged in!");
+            setAlertMessage("You are now logged in.");
+            setShowAlert(true);
+            return;
         }
-        //if token, "you have logged in successfully"
-        //if message, print message
+        setAlertMessage(data.message);
+        setShowAlert(true);
     }
 
     const attemptRegister = async () => {
         const account = await createAccount({
             username: username,
             password: password,
-            email:email,
+            email: email,
             first_name: firstName,
             last_name: lastName,
         });
         console.log(account);
+        jumpFunction();
         if(!account.message) {
-            alert("created!");
+            setAlertMessage("Your account was created.");
+            setShowAlert(true);
+            return
         }
-        //if no message, "your account has been created etc."
+        setAlertMessage(account.message);
+        setShowAlert(true);
     }
 
     return (
-        <PageDiv>
+        <PageDiv ref={topRef}>
+            {showAlert && (
+                <Alert id="shown_alert" text={alertMessage}></Alert>
+            )}
             <LoginHeader>Login</LoginHeader>
             <LoginForm key="loginform1">
                 <LoginParagraph>Username</LoginParagraph>
-                <LoginInput key="username1" type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <TextInput key="username1" type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <LoginParagraph>Password</LoginParagraph>
-                <LoginInput key="password1" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <TextInput key="password1" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 {!register ?
                     <div>
                         <Button type={"submit"} onClick={attemptLogin} text={"Login"} width={"100%"}></Button>
@@ -103,13 +105,13 @@ function Login() {
                     :
                     <div>
                         <LoginParagraph>Re-Enter Password</LoginParagraph>
-                        <LoginInput key="password2" type="password" placeholder="Enter Password" value={password2} onChange={(e) => setPassword2(e.target.value)}></LoginInput>
+                        <TextInput key="password2" type="password" placeholder="Enter Password" value={password2} onChange={(e) => setPassword2(e.target.value)}></TextInput>
                         <LoginParagraph>First Name</LoginParagraph>
-                        <LoginInput key="first_name1" type="text" placeholder="Enter Your First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></LoginInput>
+                        <TextInput key="first_name1" type="text" placeholder="Enter Your First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></TextInput>
                         <LoginParagraph>Last Name</LoginParagraph>
-                        <LoginInput key="last_name1" type="text" placeholder="Enter Your Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></LoginInput>
+                        <TextInput key="last_name1" type="text" placeholder="Enter Your Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></TextInput>
                         <LoginParagraph>Email</LoginParagraph>
-                        <LoginInput key="email1" type="text" placeholder="Enter Email Address" value={email} onChange={(e) => setEmail(e.target.value)}></LoginInput>
+                        <TextInput key="email1" type="text" placeholder="Enter Email Address" value={email} onChange={(e) => setEmail(e.target.value)}></TextInput>
                         <Button type={"submit"} text={"Register"} onClick={attemptRegister}width={"100%"} />
                         <Button onClick={() => setRegister(false)} text={"Back to Login"} width={"100%"}/>
                     </div>
