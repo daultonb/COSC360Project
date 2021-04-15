@@ -1,9 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from "@emotion/styled";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import Button from './style-components/button.component';
 import Popup from './style-components/Popup.component';
+import TextInput from './style-components/textinput.component';
+import Alert from './style-components/alert.component';
+
+const PageDiv = styled.div`
+border: 3px solid #f1f1f1;
+margin: 0 auto;
+background-color: White;
+color: black;
+padding: 50px;
+width: 400px;
+`;
+
+const PageContent = styled.div`
+  margin-top: 10vh; 
+`;
+
+const Header1 = styled.h1`
+font-weight: bold;
+text-align: center;
+color:white;  
+`;
+
+const DescriptionInput = styled.textarea`
+display: inline-block;
+padding: 12px 20px;
+margin: 8px 0;
+width: 90%;
+height: 200px;
+border-radius:5px;
+resize: vertical;
+`;
+
+const InputField = styled.input`
+display: inline-block;
+padding: 12px 20px;
+margin: 8px 0;
+width: 90%;
+border-radius:5px;
+`;
+
+const Paragraph = styled.p`
+font-weight: bold;
+color: black;
+`;
+
+
 function CreatePost() {
 
   // Handles Popup Window state
@@ -12,7 +58,19 @@ function CreatePost() {
     setIsOpen(!isOpen);
   }
 
+  const [postTitle, setPostTitle] = useState('');
+  const [postDesc, SetPostDesc] = useState('');
+
   const savePost = useStoreActions((actions) => actions.savePost);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const topRef = useRef();
+
+  function jumpFunction() {
+      topRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
 
   //Check login.
   if (!localStorage.getItem('account')) {
@@ -23,49 +81,6 @@ function CreatePost() {
 
   const accountData = JSON.parse(localStorage.getItem('account')).account;
   const username = accountData.username;
-
-  const PageDiv = styled.div`
-    border: 3px solid #f1f1f1;
-    margin: 0 auto;
-    background-color: White;
-    color: black;
-    padding: 50px;
-    width: 400px;
-  `;
-
-  const Header1 = styled.h1`
-    font-weight: bold;
-    text-align: center;
-    color:white;  
-    margin-top: 10vh;  
-  `;
-
-  const DescriptionInput = styled.textarea`
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 8px 0;
-    width: 90%;
-    height: 200px;
-    border-radius:5px;
-    resize: vertical;
-  `;
-
-  const InputField = styled.input`
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 8px 0;
-    width: 90%;
-    border-radius:5px;
-  `;
-
-  const Paragraph = styled.p`
-    font-weight: bold;
-    color: black;
-  `;
-
-  const FORM = styled.form`
-    
-  `;
 
   var currentUpload;
   var fileReader;
@@ -81,46 +96,43 @@ function CreatePost() {
     fileReader.readAsDataURL(file);
   }
 
-  function getDescription() {
-    return document.getElementById("desc").value;
-  }
-
-  function getTitle() {
-    return document.getElementById("title").value;
-  }
 
   function insertData() {
-    var title = getTitle();
-    var desc = getDescription();
-
-    if (title === "") {
-      alert("Posts need a title!");
+    jumpFunction();
+    if (postTitle === "") {
+      setShowAlert(true);
+      setAlertMessage("Posts need a title!")
       return;
-    } else if (desc === "") {
-      alert("Posts need a description!");
+    } else if (postDesc === "") {
+      setShowAlert(true);
+      setAlertMessage("Posts need a description!")
       return;
     }
 
     savePost({
-      title: title,
-      description: desc,
+      title: postTitle,
+      description: postDesc,
       file: currentUpload,
       username: username,
     });
-    alert("Your post was successfully created!");
+    setShowAlert(true);
+    setAlertMessage("Your post was successfully created!")
   }
 
 
   return (
 
-    <div>
+    <PageContent ref={topRef}>
+      {showAlert && (
+        <Alert id="shown_alert" text={alertMessage}></Alert>
+      )}
       <Header1>Create Post</Header1>
       <PageDiv>
         <div>
           <Paragraph>Title</Paragraph>
-          <InputField type="text" id="title" placeholder="Enter Title" required></InputField>
+          <InputField key="posttitle" type="text" id="title" value={postTitle} onChange={e => setPostTitle(e.target.value)} placeholder="Enter Title" required></InputField>
           <Paragraph>Description</Paragraph>
-          <DescriptionInput type="text" id="desc" placeholder="Enter Description" required></DescriptionInput>
+          <DescriptionInput key="postdesc" type="text" id="desc" value={postDesc} onChange={e => SetPostDesc(e.target.value)} placeholder="Enter Description" required></DescriptionInput>
           <Paragraph>Add An Image or Video</Paragraph>
           <input type="file" id="file" accept="image/*, video/*" onChange={e => handleChooseFile(e.target.files[0])}></input>
 
@@ -131,12 +143,12 @@ function CreatePost() {
       </PageDiv>
       {isOpen && <Popup
         content={<>
-          <b>{getTitle()}</b>
-          <p>{getDescription()}</p>
+          <b>{postTitle}</b>
+          <p>{postDesc}</p>
         </>}
         handleClose={togglePopup}
       />}
-    </div>
+    </PageContent>
   );
 }
 

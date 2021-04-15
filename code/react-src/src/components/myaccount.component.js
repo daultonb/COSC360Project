@@ -24,7 +24,7 @@ const Username = styled.span`
 const ProfileAvatar = styled.div`
     width: 100px;
     height: 100px;
-    border-radius:20%;
+    border-radius: 50%;
     overflow:hidden;
     & > img {
         display: inline;

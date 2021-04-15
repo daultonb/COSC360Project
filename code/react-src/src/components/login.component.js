@@ -93,9 +93,9 @@ function Login() {
             <LoginHeader>Login</LoginHeader>
             <LoginForm key="loginform1">
                 <LoginParagraph>Username</LoginParagraph>
-                <TextInput key="username1" type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <TextInput key="username1" type="text" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                 <LoginParagraph>Password</LoginParagraph>
-                <TextInput key="password1" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <TextInput key="password1" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 {!register ?
                     <div>
                         <Button type={"submit"} onClick={attemptLogin} text={"Login"} width={"100%"}></Button>
@@ -104,13 +104,13 @@ function Login() {
                     :
                     <div>
                         <LoginParagraph>Re-Enter Password</LoginParagraph>
-                        <TextInput key="password2" type="password" placeholder="Enter Password" value={password2} onChange={(e) => setPassword2(e.target.value)}></TextInput>
+                        <TextInput key="password2" type="password" placeholder="Enter Password" value={password2} onChange={(e) => setPassword2(e.target.value)} required></TextInput>
                         <LoginParagraph>First Name</LoginParagraph>
-                        <TextInput key="first_name1" type="text" placeholder="Enter Your First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></TextInput>
+                        <TextInput key="first_name1" type="text" placeholder="Enter Your First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required></TextInput>
                         <LoginParagraph>Last Name</LoginParagraph>
-                        <TextInput key="last_name1" type="text" placeholder="Enter Your Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></TextInput>
+                        <TextInput key="last_name1" type="text" placeholder="Enter Your Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required></TextInput>
                         <LoginParagraph>Email</LoginParagraph>
-                        <TextInput key="email1" type="text" placeholder="Enter Email Address" value={email} onChange={(e) => setEmail(e.target.value)}></TextInput>
+                        <TextInput key="email1" type="text" placeholder="Enter Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required></TextInput>
                         <Button type={"submit"} text={"Register"} onClick={attemptRegister} width={"100%"} />
                         <Button onClick={() => setRegister(false)} text={"Back to Login"} width={"100%"}/>
                     </div>
