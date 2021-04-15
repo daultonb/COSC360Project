@@ -55,7 +55,7 @@ function Homepage() {
     }, [numPosts]);
 
     const PageDiv = styled.div`
-        background-color: white;
+        background-color: #2b2b2b;
     `;
     const GridCont = styled.div`
         display: grid;
@@ -66,7 +66,6 @@ function Homepage() {
     `;
     const ContentArea = styled.div`
         margin: 10px;
-        height: ${postHeight}vh;
     `;
     const PostsCont = styled.div`
         background-color: white;
