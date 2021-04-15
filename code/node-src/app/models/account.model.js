@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
       avatar: {
         type: Sequelize.BLOB('long'),
         get() {
-          return this.getDataValue('data')?.toString('utf8');
+          return this.getDataValue('avatar')?.toString('utf8');
         },
       }
     }, {

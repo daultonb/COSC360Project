@@ -42,8 +42,8 @@ const MainStore = createStore({
     fetchTotal: thunk(async (actions, payload) => {
         //state.posts = JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]');
         const {data} = await PostsDataService.getTotal();
-        console.log(data);
-        console.log(data.data); //outputs 30, setTotal is broken?
+        // console.log(data);
+        // console.log(data.data); //outputs 30, setTotal is broken?
         actions.setTotal(data.data);
     }),
 
@@ -75,6 +75,11 @@ const MainStore = createStore({
 
     createAccount: thunk(async (actions, payload) => {
         const data = await AccountDataService.create(payload);
+        return data.data;
+    }),
+    
+    updateAccount: thunk(async (actions, payload) => {
+        const data = await AccountDataService.update(payload.id, payload);
         return data.data;
     }),
 

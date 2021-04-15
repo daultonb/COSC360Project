@@ -5,7 +5,7 @@ import React from 'react'
 
 function Hyperlink(props) {
 
-    const Link = styled.a` 
+    const Link = styled.div` 
         color: #e45911;
         text-decoration: none;   
         :hover{
@@ -14,9 +14,7 @@ function Hyperlink(props) {
     `;
 
     return (
-        <div>
         <Link href={props.href} target={props.target} onClick={props.onClick}>{props.text}</Link>
-        </div>
     )
 }
 

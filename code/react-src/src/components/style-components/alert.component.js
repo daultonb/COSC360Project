@@ -6,13 +6,14 @@ import styled from "@emotion/styled";
 function Alert(props) {
 
     const Alert = styled.div`
-        width: 20%;
+        width: 33%;
         height: 50px;
         margin: 0 auto;
         text-align: center;
         line-height: 50px;
         background-color: white;
         border-radius: 5px;
+        color: black;
     `;
 
     return (

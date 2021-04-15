@@ -56,7 +56,6 @@ function Login() {
 
     const attemptLogin = async () => {
         const data = await login({ username: username, password: password });
-        console.log(data);
         jumpFunction();
         if(data.token) {
             setAlertMessage("You are now logged in.");
@@ -75,11 +74,11 @@ function Login() {
             first_name: firstName,
             last_name: lastName,
         });
-        console.log(account);
         jumpFunction();
         if(!account.message) {
             setAlertMessage("Your account was created.");
             setShowAlert(true);
+            setRegister(false);
             return
         }
         setAlertMessage(account.message);
@@ -112,7 +111,7 @@ function Login() {
                         <TextInput key="last_name1" type="text" placeholder="Enter Your Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></TextInput>
                         <LoginParagraph>Email</LoginParagraph>
                         <TextInput key="email1" type="text" placeholder="Enter Email Address" value={email} onChange={(e) => setEmail(e.target.value)}></TextInput>
-                        <Button type={"submit"} text={"Register"} onClick={attemptRegister}width={"100%"} />
+                        <Button type={"submit"} text={"Register"} onClick={attemptRegister} width={"100%"} />
                         <Button onClick={() => setRegister(false)} text={"Back to Login"} width={"100%"}/>
                     </div>
                 }

@@ -1,5 +1,5 @@
 import http from '../http-common';
-
+import { authHeader } from '../helpers/auth-header';
 class PostsDataService {
     getAll() {
         return http.get('/posts');
@@ -18,15 +18,24 @@ class PostsDataService {
     }
 
     create(data) {
-        return http.post('/posts', data);
+        const authToken = {
+            headers: authHeader()
+        }
+        return http.post('/posts', data, authToken);
     }
 
     update(id, data) {
-        return http.put(`/posts/${id}`, data);
+        const authToken = {
+            headers: authHeader()
+        }
+        return http.put(`/posts/${id}`, data, authToken);
     }
 
     delete(id) {
-        return http.delete(`/posts/${id}`);
+        const authToken = {
+            headers: authHeader()
+        }
+        return http.delete(`/posts/${id}`, authToken);
     }
 
     findByTitle(title) {

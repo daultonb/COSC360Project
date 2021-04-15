@@ -13,12 +13,6 @@ function CreatePost() {
   }
 
   const savePost = useStoreActions((actions) => actions.savePost);
-  const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
-  const posts = useStoreState((state) => state.posts);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   //Check login.
   if (!localStorage.getItem('account')) {
@@ -42,7 +36,7 @@ function CreatePost() {
   const Header1 = styled.h1`
     font-weight: bold;
     text-align: center;
-    color:black;  
+    color:white;  
     margin-top: 10vh;  
   `;
 
@@ -98,11 +92,11 @@ function CreatePost() {
   function insertData() {
     var title = getTitle();
     var desc = getDescription();
-    
-    if(title === ""){
+
+    if (title === "") {
       alert("Posts need a title!");
       return;
-    }else if(desc === ""){
+    } else if (desc === "") {
       alert("Posts need a description!");
       return;
     }
@@ -112,40 +106,36 @@ function CreatePost() {
       description: desc,
       file: currentUpload,
       username: username,
-    });  
+    });
     alert("Your post was successfully created!");
   }
 
-  
+
   return (
-    
+
     <div>
       <Header1>Create Post</Header1>
       <PageDiv>
-        {posts && (
-          <div>
-            <Paragraph>Title</Paragraph>    
-            <InputField type="text" id="title" placeholder="Enter Title" required></InputField>
-            <Paragraph>Description</Paragraph>
-            <DescriptionInput type="text" id="desc" placeholder="Enter Description" required></DescriptionInput>
-            <Paragraph>Add An Image or Video</Paragraph>
-            <input type="file" id="file" accept="image/*, video/*" onChange={e => handleChooseFile(e.target.files[0])}></input>
-                  
-            <Button type={"submit"} text={"Create Post"} onClick={() => insertData()} width={"100%"}/>
-            <Button type={"submit"} text={"Preview Post"} onClick={togglePopup} width={"100%"}/>
-          </div>
-          
-        )}
-        
-        
+        <div>
+          <Paragraph>Title</Paragraph>
+          <InputField type="text" id="title" placeholder="Enter Title" required></InputField>
+          <Paragraph>Description</Paragraph>
+          <DescriptionInput type="text" id="desc" placeholder="Enter Description" required></DescriptionInput>
+          <Paragraph>Add An Image or Video</Paragraph>
+          <input type="file" id="file" accept="image/*, video/*" onChange={e => handleChooseFile(e.target.files[0])}></input>
+
+          <Button type={"submit"} text={"Create Post"} onClick={() => insertData()} width={"100%"} />
+          <Button type={"submit"} text={"Preview Post"} onClick={togglePopup} width={"100%"} />
+        </div>
+
       </PageDiv>
       {isOpen && <Popup
-      content={<>
-        <b>{getTitle()}</b>
-        <p>{getDescription()}</p>
-      </>}
-      handleClose={togglePopup}
-    />}
+        content={<>
+          <b>{getTitle()}</b>
+          <p>{getDescription()}</p>
+        </>}
+        handleClose={togglePopup}
+      />}
     </div>
   );
 }

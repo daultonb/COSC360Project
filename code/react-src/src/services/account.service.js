@@ -1,5 +1,5 @@
 import http from '../http-common';
-
+import { authHeader } from '../helpers/auth-header';
 class AccountDataService {
     getAll() {
         return http.get('/account');
@@ -14,11 +14,17 @@ class AccountDataService {
     }
 
     update(id, data) {
-        return http.put(`/account/update/${id}`, data);
+        const authToken = {
+            headers: authHeader()
+        }
+        return http.put(`/account/update/${id}`, data, authToken);
     }
 
     delete(id) {
-        return http.delete(`/account/delete/${id}`);
+        const authToken = {
+            headers: authHeader()
+        }
+        return http.delete(`/account/delete/${id}`, authToken);
     }
 
     login(data) {

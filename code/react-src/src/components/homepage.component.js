@@ -46,8 +46,6 @@ function Homepage() {
         fetchTotal();
         setNumPosts(n);
         fetchN(numPosts);
-        //console.log("fetches Complete.");
-        //console.log("useEffect total:",total);
     }, []);
 
     useEffect(() => {

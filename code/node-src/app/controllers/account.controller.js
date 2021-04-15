@@ -107,7 +107,7 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
     const name = req.query.username;
     const email = req.query.email;
-    console.log(name);
+    //console.log(name);
     //This is adding a LIKE statement to the db call.
     let condition = name ? { username: { [Op.eq]: name } } : null;
     let condition2 = email ? { email: { [Op.eq]: email } } : null;
@@ -144,20 +144,27 @@ exports.findOne = (req, res) => {
 exports.update = async (req, res) => {
     const id = req.params.id;
 
-    //TODO: add other update functions here
-
-    if (req.params.password) {
-        req.params.password = await bcrypt.hash(req.params.password, bcrypt.genSaltSync(10));
+    if (req.body.password) {
+        req.body.password = await bcrypt.hash(req.params.password, bcrypt.genSaltSync(10));
+    }else {
+        delete req.body.password;
     }
+
+    delete req.body.id;
+    if (!req.body.first_name) delete req.body.first_name;
+    if (!req.body.last_name) delete req.body.last_name;
+    if (!req.body.email) delete req.body.email;
+    if (!req.body.about) delete req.body.about;
 
     Account.update(req.body, {
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
-                res.send({
-                    message: "Updated."
-                });
+                Account.findByPk(id)
+                    .then(data => {
+                        res.send(data);
+                    })
             } else {
                 res.send({
                     message: `Could not update ${id}`

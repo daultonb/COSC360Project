@@ -99,7 +99,7 @@ function NavBar() {
     }else{ //logged in
         checkCanPost = <Link to={"/createpost"}> <Hyperlink text={"+ Post"}/></Link>;
         checkLoggedIn = <Link to={"/myaccount"}><Hyperlink text={"My Account"}/></Link>;
-        checkLogout = <Link onClick={()=> logout()}><Hyperlink text={"Logout"}/></Link>
+        checkLogout = <Link to={"#"} onClick={()=> logout()}><Hyperlink text={"Logout"}/></Link>
     }
 
 
@@ -121,7 +121,7 @@ function NavBar() {
                 <TextGridItem>
                     <Link to={"/posts"}><Hyperlink text={"Genres"}/></Link>
                 </TextGridItem>
-                <TextGridItem class="add">
+                <TextGridItem className="add">
                 {checkCanPost}
                 </TextGridItem>
                 <SearchGridItem>
