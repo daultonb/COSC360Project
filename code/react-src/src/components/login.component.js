@@ -16,8 +16,9 @@ const LoginForm = styled.div`
     margin: 0 auto;
     background-color: White;
     color: black;
-    padding: 50px;
-    width: 400px;
+    padding: 5vh;
+    width: 25%;
+    border-radius: 10px;
 `;
 
 const LoginParagraph = styled.p`

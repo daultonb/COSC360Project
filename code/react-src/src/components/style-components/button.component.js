@@ -6,15 +6,19 @@ import styled from "@emotion/styled";
 function Button(props) {
 
     const Button = styled.button`
-        background-color: grey;
+        background-color: #30475e;
         font-size: 1.7vmin;
         color: white;
-        border: 1px solid black;
+        border: 0;
         border-radius: 5px;
-        padding: 12px 20px;
-        margin: 8px 0;
+        padding: 1.2vh 2.0vh;
+        margin: 0.2vh;
+        text-transform: uppercase;
+        transition: all 0.4s;
         &:hover {
             opacity: 0.7;
+            cursor: pointer;
+            background-color: #47688a;
         }
 
     `;
