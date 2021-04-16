@@ -66,7 +66,6 @@ function Posts() {
     return (
         <div>
             {posts && posts.map((post, index) => {
-                console.log(genres?.find(genre => genre.key === post.genre).colorCode)
                 return <PostContent key={index}>
                     <PostHead>
                         <PostTitle css={{color: genres?.find(genre => genre.key === post.genre).colorCode }} onClick={e => redirect(post.id)}>{post.title}</PostTitle>

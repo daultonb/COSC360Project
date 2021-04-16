@@ -39,6 +39,11 @@ const MainStore = createStore({
         actions.setPosts(data);
     }),
 
+    fetchPostsByGenre: thunk(async (actions, payload) => {
+        const { data } = await PostsDataService.findByGenre(payload);
+        actions.setPosts(data);
+    }),
+
     //fetch N posts (for infinite scroll)
     fetchNPosts: thunk(async (actions, payload) => {
         const { data } = await PostsDataService.getN(payload);
@@ -51,9 +56,16 @@ const MainStore = createStore({
         actions.setTotal(data.data);
     }),
 
+    fetchPostsFromUser: thunk(async (actions, payload) => {
+        const { data } = await PostsDataService.findByUser(payload);
+        actions.setPosts(data);
+        return data.length;
+    }),
+
     searchPosts: thunk(async (actions, payload) => {
         const {data} = await PostsDataService.searchPosts(payload);
         actions.setPosts(data);
+        return data.length;
     }),
 
     removePost: thunk(async (actions, payload) => {

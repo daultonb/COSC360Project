@@ -99,8 +99,8 @@ function NavBar() {
                 <TextGridItem>
                     <Link to={"/genres"}><Hyperlink text={"Genres"} /></Link>
                 </TextGridItem>
-                <SearchGridItem>
-                    <Searchbar type={"text"} placeholder={"Search"} />
+                <SearchGridItem key="searchgrid">
+                    <Searchbar key="searchbar2" type={"text"} placeholder={"Search"} />
                 </SearchGridItem>
                 <TextGridItem className="add">
                     {checkCanPost}

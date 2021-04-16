@@ -54,7 +54,7 @@ exports.findAll = (req, res) => {
     let condition = genre ? { genre: genre } : null;
     
     let limit = n? Number(n):null;
-    let order = n?[['updatedAt', 'DESC']]: null;
+    let order = (n || genre) ?[['updatedAt', 'DESC']]: null;
 
     let options = {where: condition, limit: limit, order:order};
     
@@ -149,7 +149,7 @@ exports.delete = (req, res) => {
 };
 
 exports.searchPosts = (req, res) => {
-    const searchString = req.query.searchString;
+    const searchString = req.params.searchString;
     if (!searchString) {
         res.status(500).send({
             message: "No search string given."
@@ -158,9 +158,9 @@ exports.searchPosts = (req, res) => {
 
     //This is adding a LIKE statement to the db call.
     let condition = { [Op.or]: {title: {[Op.like]: `%${searchString}%` }, description: {[Op.like]: `%${searchString}%`}, genre: {[Op.like]: `%${searchString}%`}, username: {[Op.like]: `%${searchString}%`} }};
-    let order = n?[['updatedAt', 'DESC']]: null;
+    let order = [['updatedAt', 'DESC']];
 
-    let options = {where: condition, order:order};
+    let options = {where: condition, order: order};
     Post.findAll(options)
             .then(data => {
                 res.send(data);
@@ -179,7 +179,27 @@ exports.findAllDate = (req, res) => {
 
 // Find all posts by a certain user
 exports.findAllUser = (req, res) => {
+    const username = req.params.username;
+    if (!username) {
+        res.status(500).send({
+            message: "No username given."
+        });
+    }
 
+    //This is adding a LIKE statement to the db call.
+    let condition = { username: username };
+    let order = [['updatedAt', 'DESC']];
+
+    let options = {where: condition, order: order};
+    Post.findAll(options)
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                });
+            });
 };
 
 // Find all posts before a date

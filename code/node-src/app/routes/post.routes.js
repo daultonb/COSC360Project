@@ -10,11 +10,14 @@ module.exports = app => {
     // Retrieve all posts
     router.get("/", posts.findAll);
 
+    // Retrieve all posts by user
+    router.get("/user/:username", posts.findAllUser);
+
     // Retrieve a single post by id
     router.get("/viewpost/:id", posts.findOne);
 
     // Retrieve posts with search string
-    router.get("/search", posts.searchPosts);
+    router.get("/search/:searchString", posts.searchPosts);
 
     // Update a post with id
     router.put("/:id", authorize(), posts.update);

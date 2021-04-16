@@ -38,12 +38,12 @@ class PostsDataService {
         return http.delete(`/posts/${id}`, authToken);
     }
 
-    findByTitle(title) {
-        return http.get(`/posts?title=${title}`);
+    findByUser(user) {
+        return http.get(`/posts/user/${user}`);
     }
 
     searchPosts(searchString) {
-        return http.get(`/posts/search?searchString=${searchString}`);
+        return http.get(`/posts/search/${searchString}`);
     }
 
     findByGenre(genre) {

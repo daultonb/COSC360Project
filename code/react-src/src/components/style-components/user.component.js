@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from '@emotion/styled';
 import Moment from 'react-moment';
+import Posts from '../posts.component';
+import { useStoreActions } from 'easy-peasy';
 
 const ProfileHeader = styled.div``;
 
@@ -14,18 +16,36 @@ const ProfileAvatar = styled.div`
     height: 100px;
     border-radius: 50%;
     overflow:hidden;
+    transition: all 2s;
     & > img {
         display: inline;
         margin: 0 auto;
         width: 100%;
     }
+    &:hover {
+        transform: scale(1.1);
+    }
 `;
 
 const ProfileInformation = styled.div``;
 
-const UserPosts = styled.div``;
+const UserPosts = styled.div`
+    max-height: 50vh;
+    background-color: white;
+    color: #000;
+    border-radius: 10px;
+    overflow-y: scroll;
+`;
 
 function User({account}) {
+    const getPosts = useStoreActions((actions) => actions.fetchPostsFromUser);
+
+    let numPosts;
+
+    useEffect(async () => {
+        numPosts = await getPosts(account.username);
+    }, [])
+
     const mimeType = account.avatar?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
     const avatar = mimeType?.indexOf("image") ? <video src={account.avatar} controls width="400"></video> : <img src={account.avatar}></img>;
 
@@ -38,19 +58,19 @@ function User({account}) {
                 <h1>
                     {account.first_name} {account.last_name}
                     <Username>
-                        {account.username}, member for <Moment fromNow ago withTitle titleFormat="D MMM YYYY HH:mm:ss">{account.createdAt}</Moment>
+                        {account.username}, a member for <Moment fromNow ago withTitle titleFormat="D MMM YYYY HH:mm:ss">{account.createdAt}</Moment>
                     </Username>
                 </h1>
                 <hr></hr>
             </ProfileHeader>
             <ProfileInformation>
                 <div>
-                    <p>User Email: {account.email}</p>
-                    <p>About: {account.about}</p>
+                    <p>{account.about}</p>
                 </div>
             </ProfileInformation>
+            <h2>Posts created:</h2>
             <UserPosts>
-                posts go herr
+                {numPosts === 0 ? "No posts for user." : <Posts></Posts>}
             </UserPosts>
         </div>
     )

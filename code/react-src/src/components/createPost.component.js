@@ -4,7 +4,6 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import Button from './style-components/button.component';
 import Popup from './style-components/Popup.component';
-import TextInput from './style-components/textinput.component';
 import Alert from './style-components/alert.component';
 
 const PageDiv = styled.div`
