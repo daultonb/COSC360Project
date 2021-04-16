@@ -44,6 +44,11 @@ const MainStore = createStore({
         actions.setPosts(data);
     }),
 
+    fetchPost: thunk(async (actions, payload) => {
+        const { data } = await PostsDataService.get(payload);
+        return data;
+    }),
+
     //fetch N posts (for infinite scroll)
     fetchNPosts: thunk(async (actions, payload) => {
         const { data } = await PostsDataService.getN(payload);

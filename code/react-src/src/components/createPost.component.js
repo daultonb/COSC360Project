@@ -67,7 +67,8 @@ function CreatePost() {
 
   const [postTitle, setPostTitle] = useState('');
   const [postDesc, setPostDesc] = useState('');
-  const [postGenre, setPostGenre] = useState('');
+  const [postGenre, setPostGenre] = useState('generic');
+  const [currentUpload, setCurrentUpload] = useState();
 
   const savePost = useStoreActions((actions) => actions.savePost);
 
@@ -85,12 +86,11 @@ function CreatePost() {
   const accountData = JSON.parse(localStorage.getItem('account')).account;
   const username = accountData.username;
 
-  var currentUpload;
   var fileReader;
 
   const readFile = (e) => {
     const content = fileReader.result;
-    currentUpload = content;
+    setCurrentUpload(content);
   }
 
   const handleChooseFile = (file) => {
@@ -117,7 +117,7 @@ function CreatePost() {
       setAlertMessage("Posts need a genre.")
       return;
     }
-
+    console.log("uploading:", currentUpload)
     savePost({
       title: postTitle,
       description: postDesc,
@@ -130,8 +130,8 @@ function CreatePost() {
     setPostTitle('');
     setPostDesc('');
     setPostGenre('');
+    setCurrentUpload(null);
     jumpFunction();
-    currentUpload = undefined;
   }
 
 

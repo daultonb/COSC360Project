@@ -14,7 +14,7 @@ class PostsDataService {
     }
 
     get(id) {
-        return http.get(`/viewpost/${id}`);
+        return http.get(`/posts/viewpost/${id}`);
     }
 
     create(data) {
