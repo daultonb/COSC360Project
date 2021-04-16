@@ -126,6 +126,11 @@ const MainStore = createStore({
         return false;
     }),
 
+    getAccountFromName: thunk(async (actions, payload) => {
+        const {data} = await AccountDataService.findByUsername(payload);
+        return data;
+    }),
+
     /*
     COMMENTS
     */

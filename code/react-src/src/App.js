@@ -17,6 +17,7 @@ import ViewPost from './components/viewpost.component';
 import {PrivateRoute} from './components/functional-components/privateroute.component';
 import Search from './components/search.component';
 import ViewPosts from './components/viewposts.component';
+import Profile from './components/profile.component';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path={["/post"]} component={ViewPost}/>
           <Route path={["/viewposts"]} component={ViewPosts}/>
           <Route path={["/search/"]} component={Search}/>
+          <Route path={["/user/"]} component={Profile}/>
           <PrivateRoute exact path={["/createpost"]} component={CreatePost}/>
           <PrivateRoute exact path={["/myaccount"]} component={MyAccount}/>
           <PrivateRoute exact path={["/admin"]} component={Admin}/>

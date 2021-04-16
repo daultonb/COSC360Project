@@ -64,13 +64,14 @@ function Homepage() {
     `;
     
     const JumpBtn = styled.button`
-        background-color: grey;
+        background-color: #30475e;
         font-size: 1.7vmin;
         color: white;
-        border: 1px solid black;
+        border: none;
         border-radius: 5px;
         padding: 12px 20px;
         margin: 8px 0;
+        text-transform: uppercase;
         &:hover {
             opacity: 0.7;
         }

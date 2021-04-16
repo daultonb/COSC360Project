@@ -119,6 +119,3 @@ function MyAccount() {
 }
 
 export default MyAccount;
-
-{/* <LoginParagraph>Password</LoginParagraph>
-<TextInput key="password1" type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
