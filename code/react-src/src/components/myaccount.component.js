@@ -34,10 +34,8 @@ function MyAccount() {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
-    const topRef = useRef();
-
     function jumpFunction() {
-        topRef.current.scrollIntoView({ behavior: 'smooth' });
+        document.getElementsByTagName("html")[0].scrollIntoView({ behavior: 'smooth', alignToTop: true });
     }
 
     const myaccount = JSON.parse(localStorage.getItem('account'));
@@ -60,6 +58,11 @@ function MyAccount() {
         if (password2 && password3) {
             if (password2 === password3) {
                 password = password2;
+            }else {
+                jumpFunction();
+                setAlertMessage("Passwords do not match.");
+                setShowAlert(true);
+                return;
             }
         }
 
@@ -86,7 +89,7 @@ function MyAccount() {
     }
 
     return (
-        <PageContent ref={topRef}>
+        <PageContent>
             {showAlert && (
                 <Alert id="shown_alert" text={alertMessage}></Alert>
             )}

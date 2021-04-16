@@ -51,7 +51,7 @@ function Login() {
     const topRef = useRef();
 
     function jumpFunction(){
-        topRef.current.scrollIntoView({behavior: 'smooth'});
+        topRef.current.scrollIntoView({behavior: 'smooth', alignToTop: true });
     }
 
     const attemptLogin = async () => {
@@ -95,6 +95,7 @@ function Login() {
         if (alertMessage.length !== 0) {
             setAlertMessage(alertMessage.map((message, index) => { return (alertMessage.length > 0 && index+1 !== alertMessage.length) ? message + " - "  : message }))
             setShowAlert(true);
+            jumpFunction();
             return;
         }
 
@@ -105,7 +106,7 @@ function Login() {
             first_name: firstName,
             last_name: lastName,
         });
-        jumpFunction();
+        
         if(!account.message) {
             setAlertMessage("Your account was created.");
             setShowAlert(true);
@@ -115,10 +116,12 @@ function Login() {
             setFirstName('');
             setLastName('');
             setEmail('');
+            jumpFunction();
             return
         }
         setAlertMessage(account.message);
         setShowAlert(true);
+        jumpFunction();
     }
 
     return (
