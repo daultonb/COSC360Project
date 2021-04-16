@@ -1,5 +1,4 @@
 module.exports = (sequelize, Sequelize) => {
-    //This is the DB structure :)
     const Account = sequelize.define("account", {
       username: {
         type: Sequelize.STRING

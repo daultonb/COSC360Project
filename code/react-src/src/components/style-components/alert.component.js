@@ -7,7 +7,6 @@ function Alert(props) {
 
     const Alert = styled.div`
         width: 33%;
-        height: 50px;
         margin: 0 auto;
         text-align: center;
         line-height: 50px;

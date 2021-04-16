@@ -14,7 +14,7 @@ exports.authenticate = async (req, res) => {
         return;
     }
 
-    const account = await Account.scope('withPassword').findOne({ where: { username: username} });
+    const account = await Account.scope('withPassword').findOne({ where: { username: username }});
 
     if (!username || !account || !(await bcrypt.compare(password, account.password))) {
         res.send({
@@ -65,7 +65,7 @@ exports.create = async (req, res) => {
         });
         return;
     }
-    let condition2 = { email: { [Op.eq]: inputData.email } };
+    let condition2 = { email: inputData.email };
     let emails = await Account.findAll({ where: condition2 })
         .catch(err => {
             res.status(500).send({
@@ -107,8 +107,7 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
     const name = req.query.username;
     const email = req.query.email;
-    //console.log(name);
-    //This is adding a LIKE statement to the db call.
+    
     let condition = name ? { username: { [Op.eq]: name } } : null;
     let condition2 = email ? { email: { [Op.eq]: email } } : null;
     let oper = condition && condition2 ? Op.and : Op.or;

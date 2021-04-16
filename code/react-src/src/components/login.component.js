@@ -7,9 +7,8 @@ import TextInput from './style-components/textinput.component';
 import Alert from './style-components/alert.component';
 
 const PageDiv = styled.div`
-    background-color: #2b2b2b;
-    height: 115vh;
-    padding-top: 10vh;
+    height: 100%;
+    padding: 10vh 0;
 `;
 
 const LoginForm = styled.div`
@@ -67,6 +66,37 @@ function Login() {
     }
 
     const attemptRegister = async () => {
+        let alertMessage = [];
+        if (!username) {
+            alertMessage.push("Username is required");
+        }
+
+        if (!password || !password2) {
+            alertMessage.push("Password is required");
+        }
+
+        if (password !== password2) {
+            alertMessage.push("Passwords do not match");
+        }
+
+        if (!email) {
+            alertMessage.push("Email is required");
+        }
+
+        if (!firstName) {
+            alertMessage.push("First Name is required");
+        }
+        
+        if (!lastName) {
+            alertMessage.push("Last Name is required");
+        }
+
+        if (alertMessage.length !== 0) {
+            setAlertMessage(alertMessage.map((message, index) => { return (alertMessage.length > 0 && index+1 !== alertMessage.length) ? message + " - "  : message }))
+            setShowAlert(true);
+            return;
+        }
+
         const account = await createAccount({
             username: username,
             password: password,
@@ -79,6 +109,11 @@ function Login() {
             setAlertMessage("Your account was created.");
             setShowAlert(true);
             setRegister(false);
+            setPassword2('');
+            setEmail('');
+            setFirstName('');
+            setLastName('');
+            setEmail('');
             return
         }
         setAlertMessage(account.message);

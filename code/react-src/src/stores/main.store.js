@@ -1,6 +1,7 @@
 import { createStore, action, thunk } from 'easy-peasy';
 import PostsDataService from '../services/posts.service';
 import AccountDataService from '../services/account.service';
+import CommentsDataService from '../services/comment.service';
 
 const MainStore = createStore({
     /*
@@ -8,6 +9,14 @@ const MainStore = createStore({
     */
     posts: [],
     total: 0,
+    genreList: [
+        {key: "generic", name: "Generic", description: "Games other than the ones specified below.", colorCode: "#000000"},
+        {key: "csgo", name: "Counter Strike: Global Offensive", description: "Tactical FPS Shooter, Team-based, Realism, Skin Trading", colorCode: "#666"},
+        {key: "ow", name: "Overwatch", description: "Cartoony Team-based FPS, Role Selection and Arcade modes", colorCode: "#f49d50"},
+        {key: "lol", name: "League of Legends", description: "5v5 Arena Battle, Team-based, Role Selection", colorCode: "#65bb5e"},
+        {key: "rl", name: "Rocket League", description: "Like soccer but with cars.", colorCode: "#2f76e3"},
+        {key: "val", name: "Valorant", description: "Tactical FPS Shooter, Team-based, has the artstyle of Overwatch but gameplay of Counter Strike", colorCode: "#f93434"},
+    ],
 
     addPost: action((state, payload) => {
         state.posts.push(payload);
@@ -26,25 +35,25 @@ const MainStore = createStore({
     }),
 
     fetchPosts: thunk(async (actions, payload) => {
-        //state.posts = JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]');
         const { data } = await PostsDataService.getAll();
         actions.setPosts(data);
     }),
 
     //fetch N posts (for infinite scroll)
     fetchNPosts: thunk(async (actions, payload) => {
-        //state.posts = JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]');
         const { data } = await PostsDataService.getN(payload);
         actions.setPosts(data);
     }),
     
     //fetch N posts (for infinite scroll)
     fetchTotal: thunk(async (actions, payload) => {
-        //state.posts = JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]');
         const {data} = await PostsDataService.getTotal();
-        // console.log(data);
-        // console.log(data.data); //outputs 30, setTotal is broken?
         actions.setTotal(data.data);
+    }),
+
+    searchPosts: thunk(async (actions, payload) => {
+        const {data} = await PostsDataService.searchPosts(payload);
+        actions.setPosts(data);
     }),
 
     removePost: thunk(async (actions, payload) => {
@@ -98,6 +107,25 @@ const MainStore = createStore({
           return true;
         }
         return false;
+    }),
+
+    /*
+    COMMENTS
+    */
+    currentPostComments: [],
+
+    setComments: action((state, payload) => {
+        state.currentPostComments = payload;
+    }),
+
+    getCommentsForPost: thunk(async (actions, postId) => {
+        const { data } = await CommentsDataService.getCommentsForPost(postId);
+        actions.setComments(data);
+    }),
+
+    getAllComments: thunk(async (actions, payload) => {
+        const { data } = await CommentsDataService.getAll();
+        actions.setComments(data);
     }),
 });
 

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 
 function Footer() {
-    
     const navHeight = 40.5;
 
     const FooterDiv = styled.nav`
@@ -56,9 +55,6 @@ function Footer() {
         margin-top: 0.5vh;
 
     `;
-
-    //inline css
-    //css={{ backgroundColor: 'green'}}
 
     return (
         <FooterDiv>

@@ -2,55 +2,26 @@ import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
+/** @jsxImportSource @emotion/react */
+
 import Button from './style-components/button.component';
 import TextInput from './style-components/textinput.component';
 import Alert from './style-components/alert.component';
+import User from './style-components/user.component';
 
 const PageContent = styled.div`
-    max-width: 50%;
+    max-width: 60%;
     margin: 5% auto;
     color: white;
 `;
 
-const ProfileHeader = styled.div`
-
-`;
-
-const Username = styled.span`
-    color: gray;
-    float: right;
-`;
-
-const ProfileAvatar = styled.div`
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow:hidden;
-    & > img {
-        display: inline;
-        margin: 0 auto;
-        height: 100%;
-        width: auto;
-    }
-`;
-
-const ProfileInformation = styled.div`
-
-`;
-
-const EditProfileContent = styled.div`
-
-`;
-
-
+const EditProfileContent = styled.div``;
 
 function MyAccount() {
     const updateAccount = useStoreActions((actions) => actions.updateAccount);
     const setAccount = useStoreActions((actions) => actions.setAccount);
     const [isEditing, setIsEditing] = useState(false);
 
-    const [showAlert, setShowAlert] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
 
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -60,6 +31,9 @@ function MyAccount() {
     const [password2, setPassword2] = useState('');
     const [password3, setPassword3] = useState('');
 
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+
     const topRef = useRef();
 
     function jumpFunction() {
@@ -67,13 +41,6 @@ function MyAccount() {
     }
 
     const myaccount = JSON.parse(localStorage.getItem('account'));
-
-    //Check login.
-    if (!myaccount || !myaccount.account) {
-        return (
-            <div><br></br>You must be logged in.</div>
-        )
-    }
 
     var currentUpload;
     var fileReader;
@@ -95,7 +62,6 @@ function MyAccount() {
                 password = password2;
             }
         }
-        //check if new passwords match
 
         const account = await updateAccount({
             id: myaccount.account.id,
@@ -119,34 +85,12 @@ function MyAccount() {
         setShowAlert(true);
     }
 
-    const mimeType = myaccount.account.avatar?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-    const avatar = mimeType?.indexOf("image") ? <video src={myaccount.account.avatar} controls width="400"></video> : <img src={myaccount.account.avatar}></img>;
-
     return (
         <PageContent ref={topRef}>
             {showAlert && (
                 <Alert id="shown_alert" text={alertMessage}></Alert>
             )}
-            <ProfileHeader>
-                <ProfileAvatar>
-                    {avatar}
-                </ProfileAvatar>
-                <h1>
-                    {myaccount.account.first_name} {myaccount.account.last_name}
-                    <Username>
-                        {myaccount.account.username}
-                    </Username>
-                </h1>
-                <hr></hr>
-            </ProfileHeader>
-            <ProfileInformation>
-                <div>
-                    <p>Account Email: {myaccount.account.email}</p>
-                    <p>About: {myaccount.account.about}</p>
-                </div>
-            </ProfileInformation>
-            <Button onClick={() => setIsEditing(!isEditing)} text={"Edit My Profile"} />
-
+            <Button onClick={() => setIsEditing(!isEditing)} text={"Edit My Profile"} float="right" />
             {isEditing && (
                 <EditProfileContent>
                     <h4>Change First Name</h4>
@@ -167,6 +111,8 @@ function MyAccount() {
                     <Button text={"Submit"} onClick={attemptUpdate}></Button>
                 </EditProfileContent>
             )}
+            <br></br>
+            <User account={myaccount.account}></User>
 
         </PageContent>
     )

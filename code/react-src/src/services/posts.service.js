@@ -14,7 +14,7 @@ class PostsDataService {
     }
 
     get(id) {
-        return http.get(`/posts/${id}`);
+        return http.get(`/viewpost/${id}`);
     }
 
     create(data) {
@@ -40,6 +40,14 @@ class PostsDataService {
 
     findByTitle(title) {
         return http.get(`/posts?title=${title}`);
+    }
+
+    searchPosts(searchString) {
+        return http.get(`/posts/search?searchString=${searchString}`);
+    }
+
+    findByGenre(genre) {
+        return http.get(`/posts?genre=${genre}`);
     }
 }
 

@@ -19,14 +19,7 @@ function Button(props) {
 
     `;
 
-    //inline css
-    //css={{ backgroundColor: 'green'}}
-
-    return (
-        <div>
-        <Button onClick={props.onClick} type={props.type} css={{height: props.height, width:props.width}}>{props.text}</Button>
-        </div>
-    )
+    return <Button onClick={props.onClick} type={props.type} css={{ height: props.height, width: props.width, float: props.float }}>{props.text}</Button>;
 }
 
 export default Button;

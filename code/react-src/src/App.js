@@ -5,14 +5,15 @@ import './App.css';
 import { StoreProvider } from 'easy-peasy';
 import MainStore from './stores/main.store';
 
-import PostsList from './components/posts-list.component'
 import NavBar from './components/navbar.component';
 import MyAccount from './components/myaccount.component';
+import Genres from './components/genres.component';
 import Footer from './components/footer.component';
 import Login from './components/login.component';
 import Homepage from './components/homepage.component';
 import CreatePost from './components/createPost.component';
 import Admin from './components/admin.component';
+import ViewPost from './components/viewpost.component';
 import {PrivateRoute} from './components/functional-components/privateroute.component';
 
 
@@ -23,9 +24,10 @@ function App() {
         <NavBar/>
         <Switch>
           <Route exact path={["/"]} component={Homepage} />
-          <Route exact path={["/posts"]} component={PostsList} />
-          <PrivateRoute exact path={["/createpost"]} component={CreatePost}/>
+          <Route exact path={["/genres"]} component={Genres} />
           <Route exact path={["/login"]} component={Login}/>
+          <Route path={["/post"]} component={ViewPost}/>
+          <PrivateRoute exact path={["/createpost"]} component={CreatePost}/>
           <PrivateRoute exact path={["/myaccount"]} component={MyAccount}/>
           <PrivateRoute exact path={["/admin"]} component={Admin}/>
         </Switch>

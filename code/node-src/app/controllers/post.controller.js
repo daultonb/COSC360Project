@@ -10,14 +10,14 @@ exports.create = (req, res) => {
     if (!inputData.title) {
         //empty title
         res.status(400).send({
-            message: "empty"
+            message: "No title given."
         });
         return;
     }
     if (!inputData.description) {
         //empty description
         res.status(400).send({
-            message: "empty"
+            message: "No description given."
         });
         return;
     }
@@ -27,7 +27,8 @@ exports.create = (req, res) => {
         title: inputData.title,
         description: inputData.description,
         data: inputData.file,
-        username: inputData.username
+        username: inputData.username,
+        genre: inputData.genre
     };
 
     //Save in the db
@@ -42,14 +43,16 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all posts, optional title input
+// Retrieve all posts
 exports.findAll = (req, res) => {
-    const title = req.query.title;
     const n = req.query.n;
     const total = req.query.total;
 
+    const genre = req.query.genre;
+
     //This is adding a LIKE statement to the db call.
-    let condition = title ? { title: { [Op.like]: `%$title}%` } } : null;
+    let condition = genre ? { genre: genre } : null;
+    
     let limit = n? Number(n):null;
     let order = n?[['updatedAt', 'DESC']]: null;
 
@@ -80,30 +83,13 @@ exports.findAll = (req, res) => {
             });
 };
 
-// Retrieve all posts, optional title input
-/* attempt #1
-exports.findTotal = (req, res) => {
-    Post.count()
-        .then(data => {
-            console.log(data);
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Unknown error."
-            });
-        });
-    
-};*/
-
-
 // Find a single post with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
     //FindByPrimaryKey
-    Post.findByPk(id)
+    Post.scope('withMedia').findByPk(id)
         .then(data => {
-            res.end(data);
+            res.send(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -161,6 +147,30 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+exports.searchPosts = (req, res) => {
+    const searchString = req.query.searchString;
+    if (!searchString) {
+        res.status(500).send({
+            message: "No search string given."
+        });
+    }
+
+    //This is adding a LIKE statement to the db call.
+    let condition = { [Op.or]: {title: {[Op.like]: `%${searchString}%` }, description: {[Op.like]: `%${searchString}%`}, genre: {[Op.like]: `%${searchString}%`}, username: {[Op.like]: `%${searchString}%`} }};
+    let order = n?[['updatedAt', 'DESC']]: null;
+
+    let options = {where: condition, order:order};
+    Post.findAll(options)
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                });
+            });
+}
 
 // Find all posts by a certain date
 exports.findAllDate = (req, res) => {

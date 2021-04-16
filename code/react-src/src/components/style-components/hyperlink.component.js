@@ -6,10 +6,10 @@ import React from 'react'
 function Hyperlink(props) {
 
     const Link = styled.div` 
-        color: #e45911;
-        text-decoration: none;   
+        color: white;
+        text-decoration: none;
         :hover{
-            color: orange;
+            color: gray;
         }
     `;
 
