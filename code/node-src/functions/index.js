@@ -1,3 +1,4 @@
+const functions = require('firebase-functions');
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -7,7 +8,7 @@ const app = express();
 const db = require("./app/models");
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: ["https://cosc360project-9d804.web.app", "http://localhost:3000"]
 };
 
 app.use(cors(corsOptions));
@@ -35,7 +36,9 @@ require("./app/routes/account.routes")(app);
 require("./app/routes/comment.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
+
+exports.app = functions.https.onRequest(app);

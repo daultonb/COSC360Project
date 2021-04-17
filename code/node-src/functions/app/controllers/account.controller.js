@@ -112,7 +112,7 @@ exports.findAll = (req, res) => {
     let condition = name ? { username: { [Op.eq]: name } } : null;
     let condition2 = email ? { email: { [Op.eq]: email } } : null;
     let oper = condition && condition2 ? Op.and : Op.or;
-    let whereClause = condition && condition2 ? { [oper]: [condition, condition2] } : null;
+    let whereClause = condition || condition2 ? { [oper]: [condition, condition2] } : null;
 
     let limit = n ? Number(n) : null;
     let order = [['updatedAt', 'DESC']];

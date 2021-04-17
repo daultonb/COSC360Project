@@ -61,7 +61,6 @@ exports.findAll = (req, res) => {
     if(total){
         Post.count()
         .then(data => {
-            //console.log(data);
             res.send({data});
         })
         .catch(err => {
