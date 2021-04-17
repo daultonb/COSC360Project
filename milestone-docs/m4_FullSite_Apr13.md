@@ -6,7 +6,7 @@
 
 > Summary of features implemented
 
-- [ ] Status: WIP, Assigned to: Damyn
+- [x] Status: WIP, Assigned to: Damyn
 
 
 > A 2-3 pages walkthrough document that can be used to test the site by performing the walkthrough you describe. 
@@ -15,7 +15,7 @@
 > This document will be used as a guide to test what you did. 
 > This document should be written as a user guide.
 
-- [ ] Status: WIP, Assigned to: Daulton
+- [x] Status: WIP, Assigned to: Daulton
 
 
 > A 2-3 pages detailed description of your implementation from a system or developer's perspective including: 
@@ -28,7 +28,7 @@
 > 
 > - Identify known limitations of the site?
 
-- [ ] Status: WIP, Assigned to: Ross
+- [x] Status: WIP, Assigned to: Ross
 
 
 > 10% is reserved for deployment, client and server-side unit testing
