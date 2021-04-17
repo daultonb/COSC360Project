@@ -63,7 +63,7 @@ function Admin() {
     }
 
      //Check login.
-    if (!localStorage.getItem('account').admin) {
+    if (!JSON.parse(localStorage.getItem('account')).account.admin) {
         return (
         <PageDiv><p>You must be an admin to view this page.</p></PageDiv>
         )
