@@ -43,9 +43,13 @@ function Homepage() {
         setLastTotal(total);
         setTotal(total);
         setNumPosts(n);
-        setInterval(async () => { 
+        const newInterval = setInterval(async () => { 
             setTotal(await fetchTotal());
         }, 60000);
+
+        return () => {
+            clearInterval(newInterval);
+        } 
     }, []);
 
     useEffect(() => {

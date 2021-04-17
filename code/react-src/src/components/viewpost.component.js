@@ -148,10 +148,15 @@ function ViewPost() {
         }
         setPost(await fetchPost(Number(postId)));
         setComments(await fetchComments(Number(postId)));
-        setInterval(async () => {
+        const newInterval = setInterval(async () => {
             setComments(await fetchComments(Number(postId)));
-        }, 60000)
+        }, 300000)
+        return () => {
+            clearInterval(newInterval);
+        } 
     }, []);
+
+
 
     const mimeType = post?.data?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
     const postMedia = mimeType?.indexOf("image") ? <video src={post?.data} controls width="400"></video> : <img src={post?.data}></img>;
@@ -178,7 +183,7 @@ function ViewPost() {
                         </PostDetails>
                     </PostHead>
                     <PostBody>
-                        <PostDescription>{post.description.length > 100 ? post.description.substring(0, 100) + "..." : post.description}</PostDescription>
+                        <PostDescription>{post.description}</PostDescription>
                     </PostBody>
                     {postMedia}
                     {myaccount.account && (

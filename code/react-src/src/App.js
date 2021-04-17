@@ -18,6 +18,7 @@ import {PrivateRoute} from './components/functional-components/privateroute.comp
 import Search from './components/search.component';
 import ViewPosts from './components/viewposts.component';
 import Profile from './components/profile.component';
+import NotFound from './components/style-components/notfound.component';
 
 
 function App() {
@@ -29,13 +30,14 @@ function App() {
           <Route exact path={["/"]} component={Homepage} />
           <Route exact path={["/genres"]} component={Genres} />
           <Route exact path={["/login"]} component={Login}/>
-          <Route path={["/post"]} component={ViewPost}/>
-          <Route path={["/viewposts"]} component={ViewPosts}/>
-          <Route path={["/search/"]} component={Search}/>
-          <Route path={["/user/"]} component={Profile}/>
+          <Route exact path={["/post/:postId"]} component={ViewPost}/>
+          <Route exact path={["/viewposts"]} component={ViewPosts}/>
+          <Route exact path={["/search/:searchString"]} component={Search}/>
+          <Route exact path={["/user/:username"]} component={Profile}/>
           <PrivateRoute exact path={["/createpost"]} component={CreatePost}/>
           <PrivateRoute exact path={["/myaccount"]} component={MyAccount}/>
           <PrivateRoute exact path={["/admin"]} component={Admin}/>
+          <Route><NotFound /></Route>
         </Switch>
       </div>
     </StoreProvider>
