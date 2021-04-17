@@ -39,6 +39,7 @@ function App() {
           <PrivateRoute exact path={["/admin"]} component={Admin}/>
           <Route><NotFound /></Route>
         </Switch>
+        <Footer/>
       </div>
     </StoreProvider>
   );

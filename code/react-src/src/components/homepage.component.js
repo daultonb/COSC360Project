@@ -65,7 +65,7 @@ function Homepage() {
     }, [numPosts]);
 
     const PageDiv = styled.div`
-        
+        padding-bottom: 15px;
     `;
     const GridCont = styled.div`
         display: grid;
@@ -100,7 +100,7 @@ function Homepage() {
         }
         float: right;
         right: 30px;
-        bottom: 0;
+        bottom: 55px;
         z-index: 1;
         position: fixed;
     `;
