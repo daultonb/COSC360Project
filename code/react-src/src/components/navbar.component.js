@@ -39,7 +39,8 @@ const GridCont = styled.div`
 //Icon
 const ImgGridItem = styled.div`
     img {
-        width: 3vh;
+        width: 40%;
+        vertical-align: middle;
     }
 `;
 //Text
@@ -91,7 +92,7 @@ function NavBar() {
         <Navi>
             <GridCont>
                 <ImgGridItem>
-                    <img src="https://media.2oceansvibe.com/wp-content/uploads/2014/08/o-DIRTY-BIRD-FRIED-CHICKEN-570.jpg" alt="Logo" />
+                    <img src="ddr.png" alt="Logo" />
                 </ImgGridItem>
                 <TextGridItem>
                     <Link to={"/"}><Hyperlink text={"Home"} /></Link>
