@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState} from 'easy-peasy';
 
 import { useLocation } from 'react-router-dom';
 import Posts from './posts.component';
@@ -15,6 +15,7 @@ const Results = styled.div`
 
 function ViewPosts() {
     const getPosts = useStoreActions((actions) => actions.fetchPostsByGenre);
+    const genres = useStoreState((state) => state.genreList);
     const location = useLocation();
     const [showAlert, setShowAlert] = useState(false);
 
@@ -35,7 +36,7 @@ function ViewPosts() {
 
     return (
         <Results>
-            <h2>Viewing posts: {params.get("genre")}</h2>
+            <h2>Viewing posts: {genres.find(genre => genre.key === params.get("genre")).name}</h2>
             {showAlert ? "No search results found" : <Posts></Posts>}
         </Results>
     )
