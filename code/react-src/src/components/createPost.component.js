@@ -87,6 +87,7 @@ function CreatePost() {
   const username = accountData.username;
 
   var fileReader;
+  
 
   const readFile = (e) => {
     const content = fileReader.result;
@@ -167,6 +168,8 @@ function CreatePost() {
         content={<>
           <b>{postTitle}</b>
           <p>{postDesc}</p>
+          {currentUpload.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0]?.indexOf("image") ? <video src={currentUpload} controls width="30%"></video> : <img src={currentUpload} width="30%"></img>}
+          <p>Your post will be made in the {genres.find(genre => genre.key === postGenre).name} genre.</p>
         </>}
         handleClose={togglePopup}
       />}
