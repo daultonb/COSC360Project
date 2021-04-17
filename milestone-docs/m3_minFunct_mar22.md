@@ -5,7 +5,7 @@
 ## Requirements
 
 > Server-side security
-- [ ] Status: WIP, Assigned to: 
+- [x] Status: Complete
 
 
 > Post storage in database
