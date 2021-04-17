@@ -186,7 +186,6 @@ exports.findAllUser = (req, res) => {
         });
     }
 
-    //This is adding a LIKE statement to the db call.
     let condition = { username: username };
     let order = [['updatedAt', 'DESC']];
 
@@ -201,15 +200,3 @@ exports.findAllUser = (req, res) => {
                 });
             });
 };
-
-// Find all posts before a date
-exports.findAllBefore = (req, res) => {
-
-};
-
-// Find all posts after a date
-exports.findAllAfter = (req, res) => {
-
-};
-
-//etc. add other methods here.

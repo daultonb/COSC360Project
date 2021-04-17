@@ -43,8 +43,9 @@ exports.findAll = (req, res) => {
     const post_id = req.query.post_id;
 
     let condition = post_id ? { post_id: post_id } : null;
+    let order = [['updatedAt', 'DESC']];
 
-    let options = {where: condition, limit: limit, order: order};
+    let options = {where: condition, order: order};
     
     Comment.findAll(options)
         .then(data => {
@@ -122,22 +123,26 @@ exports.delete = (req, res) => {
         });
 };
 
-// Find all comments by a certain date
-exports.findAllDate = (req, res) => {
-
-};
-
-// Find all comments by a certain user
+// Find all posts by a certain user
 exports.findAllUser = (req, res) => {
+    const username = req.params.username;
+    if (!username) {
+        res.status(500).send({
+            message: "No username given."
+        });
+    }
 
-};
+    let condition = { username: username };
+    let order = [['updatedAt', 'DESC']];
 
-// Find all comments before a date
-exports.findAllBefore = (req, res) => {
-
-};
-
-// Find all comments after a date
-exports.findAllAfter = (req, res) => {
-
+    let options = {where: condition, order: order};
+    Comment.findAll(options)
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                });
+            });
 };

@@ -134,20 +134,25 @@ const MainStore = createStore({
     /*
     COMMENTS
     */
-    currentPostComments: [],
 
-    setComments: action((state, payload) => {
-        state.currentPostComments = payload;
+    createComment: thunk(async (actions, payload) => {
+        const data = await CommentsDataService.create(payload);
+        return data.data;
     }),
 
     getCommentsForPost: thunk(async (actions, postId) => {
-        const { data } = await CommentsDataService.getCommentsForPost(postId);
-        actions.setComments(data);
+        const { data } = await CommentsDataService.findForPost(postId);
+        return data;
+    }),
+
+    getCommentsForUser: thunk(async (actions, payload) => {
+        const {data} = await CommentsDataService.findForUser(payload);
+        return data;
     }),
 
     getAllComments: thunk(async (actions, payload) => {
         const { data } = await CommentsDataService.getAll();
-        actions.setComments(data);
+        return data;
     }),
 });
 

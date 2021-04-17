@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from '@emotion/styled';
 import Moment from 'react-moment';
 import Posts from '../posts.component';
 import { useStoreActions } from 'easy-peasy';
+import Comment from './comment.component';
 
 const ProfileHeader = styled.div``;
 
@@ -29,21 +30,26 @@ const ProfileAvatar = styled.div`
 
 const ProfileInformation = styled.div``;
 
-const UserPosts = styled.div`
+const UserData = styled.div`
     max-height: 50vh;
     background-color: white;
     color: #000;
     border-radius: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding: 1vh;
 `;
 
 function User({account}) {
     const getPosts = useStoreActions((actions) => actions.fetchPostsFromUser);
+    const getComments = useStoreActions((actions) => actions.getCommentsForUser);
+
+    const [comments, setComments] = useState();
 
     let numPosts;
 
     useEffect(async () => {
         numPosts = await getPosts(account.username);
+        setComments(await getComments(account.username));
     }, [])
 
     const mimeType = account.avatar?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
@@ -69,9 +75,19 @@ function User({account}) {
                 </div>
             </ProfileInformation>
             <h2>Posts created:</h2>
-            <UserPosts>
+            <UserData>
                 {numPosts === 0 ? "No posts for user." : <Posts></Posts>}
-            </UserPosts>
+            </UserData>
+            <h2>Comments created:</h2>
+            <UserData>
+                {comments?.length > 0 ? 
+                    comments.map(comment => {
+                        return <Comment key={comment.id} comment={comment} showPostLink={true}></Comment>
+                    })
+                    :
+                    "No comments for user."
+                }
+            </UserData>
         </div>
     )
 }

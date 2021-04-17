@@ -6,7 +6,7 @@ class CommentsDataService {
     }
 
     get(id) {
-        return http.get(`/comments/${id}`);
+        return http.get(`/comments/comment/${id}`);
     }
 
     create(data) {
@@ -32,6 +32,10 @@ class CommentsDataService {
 
     findForPost(postId) {
         return http.get(`/comments?post_id=${postId}`);
+    }
+
+    findForUser(username) {
+        return http.get(`/comments/user/${username}`);
     }
 }
 

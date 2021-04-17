@@ -10,8 +10,11 @@ module.exports = app => {
     // Retrieve all comments
     router.get("/", comments.findAll);
 
+    // Retrieve comment by user
+    router.get("/user/:username", comments.findAllUser);
+
     // Retrieve a single comment by id
-    router.get("/:id", comments.findOne);
+    router.get("/comment/:id", comments.findOne);
 
     // Update a comment with id
     router.put("/:id", authorize(), comments.update);
