@@ -159,7 +159,7 @@ function ViewPost() {
 
 
     const mimeType = post?.data?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-    const postMedia = mimeType?.indexOf("image") ? <video src={post?.data} controls width="400"></video> : <img src={post?.data}></img>;
+    const postMedia = mimeType?.indexOf("image") ? <video src={post?.data} controls width="40%"></video> : <img src={post?.data} width="100%"></img>;
 
     let adminActions;
     if (hasAccess()) {
@@ -185,7 +185,7 @@ function ViewPost() {
                     <PostBody>
                         <PostDescription>{post.description}</PostDescription>
                     </PostBody>
-                    {postMedia}
+                    <div>{postMedia}</div>
                     {myaccount.account && (
                         <PostActions>
                             {adminActions}
