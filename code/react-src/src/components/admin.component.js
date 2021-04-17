@@ -33,6 +33,7 @@ const Username = styled.span`
 
 
 function Admin() {
+
     const posts = useStoreState((state) => state.posts);
     const fetchN = useStoreActions((actions) => actions.fetchNPosts);
     const fetchComments = useStoreActions((actions) => actions.getAllComments);
@@ -60,6 +61,14 @@ function Admin() {
         await deleteUser(id)
         setUsers(await getUsers());
     }
+
+     //Check login.
+    if (!localStorage.getItem('account').admin) {
+        return (
+        <PageDiv><p>You must be an admin to view this page.</p></PageDiv>
+        )
+    }
+
 
     return (
         <PageDiv>
