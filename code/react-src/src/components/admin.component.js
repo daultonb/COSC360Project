@@ -3,62 +3,93 @@ import styled from '@emotion/styled';
 
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-const Cont = styled.div`
-        padding-top: 50px;
-        padding-left: 50px;
+import Posts from './posts.component';
+import Comment from './style-components/comment.component';
+import Button from './style-components/button.component';
+
+import Moment from 'react-moment';
+import { useHistory } from 'react-router-dom';
+
+const PageDiv = styled.div`
+    width: 60%;
+    padding: 2vh;
+    margin: 10vh auto;
+    background-color: white;
+    border-radius: 10px;
 `;
 
+const ContentList = styled.div`
+    overflow-y: auto;
+    max-height: 50vh;
+`;
+
+const Username = styled.span` 
+    color: blue;
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+`;
+
+
 function Admin() {
-    const savePost = useStoreActions((actions) => actions.savePost);
-    const removePost = useStoreActions((actions) => actions.removePost);
-    const fetchPosts = useStoreActions((actions) => actions.fetchPosts);
     const posts = useStoreState((state) => state.posts);
+    const fetchN = useStoreActions((actions) => actions.fetchNPosts);
+    const fetchComments = useStoreActions((actions) => actions.getAllComments);
+    const getUsers = useStoreActions((actions) => actions.getAllAccounts);
+    const deleteUser = useStoreActions((actions) => actions.removeAccount);
+
+    const [comments, setComments] = useState();
+    const [users, setUsers] = useState();
     
-    
-    useEffect(() => {
-        fetchPosts();
+    useEffect(async () => {
+        await fetchN(10);
+        setComments(await fetchComments(20));
+        setUsers(await getUsers());
     }, []);
 
-    const PageDiv = styled.div`
-        background-color: #2b2b2b;
-        padding-top: 2vh;
-        min-height: 100vh;
-        padding-bottom: 2vh;
-    `;
+    const history = useHistory();
 
-    //SearchBar
-    const SearchGridItem = styled.div`
-        width: 30vw;
-        height: 5vh;
-        margin-left: 28.5vw;
-    `;
-    const SearchBar = styled.input`
-        border: 1px solid black;
-        border-radius: 8px;
-        width: 100%;
-        height: 60%;
-        margin-top: 0.5vh;
-        font-size: 2.5vmin;
-    `;
+    const userRedirect = (username) => {
+        history.push(`/user/${username}`);
+    }
+
+    const attemptDeleteUser = async (id) => {
+        const confirmed = window.confirm("Are you sure you want to delete this user?");
+        if(!confirmed) return;
+        await deleteUser(id)
+        setUsers(await getUsers());
+    }
 
     return (
         <PageDiv>
-            <SearchGridItem>
-                <SearchBar type= "text" placeholder="Search"/>
-            </SearchGridItem>
-
-            <ul>
-                {posts && posts.map((post, index) => {
-                    return <li onClick={fetchPosts} className="post" key={index}>
-                        <h1>{post.title}</h1>
-                        <p>{post.description}</p>
-                        <p>{post.username}</p>
-                        <p>{post.createdAt}</p>
-                        <button onClick={() => removePost(post.id)}>Delete</button>
-                    </li>;
+            <h2>Recent Posts</h2>
+            <ContentList>
+                {posts && (<Posts></Posts>)}
+            </ContentList>
+            <hr></hr>
+            <h2>Recent Comments</h2>
+            <ContentList>
+                {comments && comments.map(comment => {
+                    return <Comment hasAccess={() => {return false}} key={comment.id} showPostLink={true} comment={comment}></Comment>;
                 })}
-                
-            </ul>
+            </ContentList>
+            <h2>All Users</h2>
+            <ContentList>
+                {users && users.map(user => {
+                    return (
+                        <div key={user.id}>
+                            <Button float="right" text={"Remove User"} onClick={e => attemptDeleteUser(user.id)}></Button>
+                            <h3><Username onClick={e=> userRedirect(user.username)}>{user.username}</Username> - {user.email}</h3>
+                            <h4>{user.first_name} {user.last_name}</h4>
+                            Signed up <Moment fromNow ago withTitle titleFormat="D MMM YYYY HH:mm:ss">{user.createdAt}</Moment> ago
+                            <br></br>
+                            Last updated <Moment fromNow ago withTitle titleFormat="D MMM YYYY HH:mm:ss">{user.updatedAt}</Moment> ago
+                            <hr></hr>
+                        </div>
+                    );
+                })}
+            </ContentList>
         </PageDiv>
     )
 }

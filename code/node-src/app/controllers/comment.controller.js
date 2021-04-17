@@ -41,11 +41,13 @@ exports.create = (req, res) => {
 // Retrieve all comments, with post_id param
 exports.findAll = (req, res) => {
     const post_id = req.query.post_id;
+    const n = req.query.n;
 
     let condition = post_id ? { post_id: post_id } : null;
     let order = [['updatedAt', 'DESC']];
+    let limit = n ? Number(n) : null;
 
-    let options = {where: condition, order: order};
+    let options = {where: condition, limit: limit, order:order};
     
     Comment.findAll(options)
         .then(data => {

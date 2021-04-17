@@ -109,6 +109,10 @@ const MainStore = createStore({
         return data.data;
     }),
 
+    removeAccount: thunk(async (actions, payload) => {
+        await AccountDataService.delete(payload);
+    }),
+
     login: thunk(async (actions, payload) => {
         const data = await AccountDataService.login(payload);
         const accountData = data.data;
@@ -128,6 +132,11 @@ const MainStore = createStore({
 
     getAccountFromName: thunk(async (actions, payload) => {
         const {data} = await AccountDataService.findByUsername(payload);
+        return data;
+    }),
+
+    getAllAccounts: thunk(async (actions, payload) => {
+        const {data} = await AccountDataService.getAll();
         return data;
     }),
 
@@ -155,7 +164,7 @@ const MainStore = createStore({
     }),
 
     getAllComments: thunk(async (actions, payload) => {
-        const { data } = await CommentsDataService.getAll();
+        const { data } = await CommentsDataService.getN(payload);
         return data;
     }),
 });

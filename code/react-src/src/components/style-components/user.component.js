@@ -49,7 +49,6 @@ function User({account}) {
 
     useEffect(async () => {
         setNumPosts(await getPosts(account.username));
-        console.log(numPosts);
         setComments(await getComments(account.username));
     }, [])
 
@@ -83,7 +82,7 @@ function User({account}) {
             <UserData>
                 {comments?.length > 0 ? 
                     comments.map(comment => {
-                        return <Comment key={comment.id} comment={comment} showPostLink={true}></Comment>
+                        return <Comment hasAccess={() => {return false}} key={comment.id} comment={comment} showPostLink={true}></Comment>
                     })
                     :
                     "No comments for user."

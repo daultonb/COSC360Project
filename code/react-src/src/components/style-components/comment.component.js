@@ -71,7 +71,7 @@ function Comment({comment, showPostLink, hasAccess, deleteCallback}) {
                     &nbsp;- <ViewLink onClick={e=> redirect(comment.post_id)}>View Post</ViewLink>
                 </span> 
             )}
-            {hasAccess && (
+            {hasAccess() && (
                 <Button onClick={attemptDelete} float="right" text={"Remove"}></Button>
             )}
             <CommentBody>

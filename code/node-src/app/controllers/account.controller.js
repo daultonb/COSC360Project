@@ -107,13 +107,17 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
     const name = req.query.username;
     const email = req.query.email;
+    const n = req.query.n;
     
     let condition = name ? { username: { [Op.eq]: name } } : null;
     let condition2 = email ? { email: { [Op.eq]: email } } : null;
     let oper = condition && condition2 ? Op.and : Op.or;
-    let whereClause = { [oper]: [condition, condition2] }
+    let whereClause = condition && condition2 ? { [oper]: [condition, condition2] } : null;
 
-    Account.findAll({ where: whereClause })
+    let limit = n ? Number(n) : null;
+    let order = [['updatedAt', 'DESC']];
+
+    Account.findAll({ where: whereClause, limit: limit, order: order })
         .then(data => {
             res.send(data);
         })

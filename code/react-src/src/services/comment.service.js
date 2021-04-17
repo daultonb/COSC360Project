@@ -9,6 +9,10 @@ class CommentsDataService {
         return http.get(`/comments/comment/${id}`);
     }
 
+    getN(n) {
+        return http.get(`/comments?n=${n}`)
+    }
+
     create(data) {
         const authToken = {
             headers: authHeader()

@@ -9,6 +9,10 @@ class AccountDataService {
         return http.get(`/account/find/${id}`);
     }
 
+    getN(n) {
+        return http.get(`/account?n=${n}`);
+    }
+
     create(data) {
         return http.post('/account/create', data);
     }

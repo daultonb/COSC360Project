@@ -58,7 +58,6 @@ exports.findAll = (req, res) => {
 
     let options = {where: condition, limit: limit, order:order};
     
-    
     if(total){
         Post.count()
         .then(data => {
