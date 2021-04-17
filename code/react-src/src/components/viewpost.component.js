@@ -66,9 +66,13 @@ const PostHead = styled.div`
 
 function ViewPost() {
     const genres = useStoreState((state) => state.genreList);
+
     const fetchPost = useStoreActions((actions) => actions.fetchPost);
     const fetchComments = useStoreActions((actions) => actions.getCommentsForPost);
+
+    const deletePost = useStoreActions((actions) => actions.removePost);
     const saveComment = useStoreActions((actions) => actions.createComment);
+
     const myaccount = useStoreState((state) => state.myAccount);
 
     const [post, setPost] = useState();
@@ -88,6 +92,10 @@ function ViewPost() {
         history.push(`/user/${username}`);
     }
 
+    const hasAccess = () => {
+        return myaccount.account?.admin === true || myaccount.account?.username === post?.username;
+    }
+
     var fileReader;
 
     const readFile = (e) => {
@@ -101,7 +109,6 @@ function ViewPost() {
       fileReader.readAsDataURL(file);
     }
   
-
     const attemptComment = async () => {
         if (!comment) {
             setShowAlert(true);
@@ -117,8 +124,21 @@ function ViewPost() {
         setShowAlert(true);
         setAlertMessage("Your comment was posted!")
         setComment('');
-        const postId = location.pathname.split("/")[2];
-        setComments(await fetchComments(Number(postId)));
+        setComments(await fetchComments(Number(post.id)));
+    }
+
+    const attemptDeletePost = async () => {
+        if (!hasAccess()) {
+            return;
+        }
+        const confirmed = window.confirm("Are you sure you want to delete this?");
+        if(!confirmed) return;
+        deletePost(post.id)
+        history.push("/");
+    }
+
+    const deleteCallback = async () => {
+        setComments(await fetchComments(Number(post.id)));
     }
 
     useEffect(async () => {
@@ -134,11 +154,10 @@ function ViewPost() {
     const postMedia = mimeType?.indexOf("image") ? <video src={post?.data} controls width="400"></video> : <img src={post?.data}></img>;
 
     let adminActions;
-    if (myaccount.account?.admin === true || myaccount.account?.username === post?.username) {
+    if (hasAccess()) {
         adminActions = (
             <div>
-                <Button float="right" text={"Delete Post"}></Button>
-                <Button float="right" text={"Edit Post"}></Button>
+                <Button float="right" onClick={attemptDeletePost} text={"Delete Post"}></Button>
             </div>
         );
     }
@@ -183,7 +202,7 @@ function ViewPost() {
                     <PostComments>
                         {comments?.length > 0 ? 
                             comments.map(comment => {
-                                return <Comment key={comment.id} comment={comment}></Comment>;
+                                return <Comment key={comment.id} deleteCallback={deleteCallback} hasAccess={hasAccess} comment={comment}></Comment>;
                             })
                          : "No comments yet."}
                     </PostComments>

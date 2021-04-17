@@ -22,6 +22,7 @@ const ProfileAvatar = styled.div`
         display: inline;
         margin: 0 auto;
         width: 100%;
+        height: 100%;
     }
     &:hover {
         transform: scale(1.1);
@@ -44,11 +45,11 @@ function User({account}) {
     const getComments = useStoreActions((actions) => actions.getCommentsForUser);
 
     const [comments, setComments] = useState();
-
-    let numPosts;
+    const [numPosts, setNumPosts] = useState();
 
     useEffect(async () => {
-        numPosts = await getPosts(account.username);
+        setNumPosts(await getPosts(account.username));
+        console.log(numPosts);
         setComments(await getComments(account.username));
     }, [])
 
@@ -76,7 +77,7 @@ function User({account}) {
             </ProfileInformation>
             <h2>Posts created:</h2>
             <UserData>
-                {numPosts === 0 ? "No posts for user." : <Posts></Posts>}
+                {numPosts > 0 ? <Posts></Posts> :  "No posts for user." }
             </UserData>
             <h2>Comments created:</h2>
             <UserData>

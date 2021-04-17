@@ -59,6 +59,7 @@ const MainStore = createStore({
     fetchTotal: thunk(async (actions, payload) => {
         const {data} = await PostsDataService.getTotal();
         actions.setTotal(data.data);
+        return data.data;
     }),
 
     fetchPostsFromUser: thunk(async (actions, payload) => {
@@ -74,7 +75,6 @@ const MainStore = createStore({
     }),
 
     removePost: thunk(async (actions, payload) => {
-        //state.posts = JSON.parse('[{"id":1,"title":"testing","description":"testing2","username":"skyrossm","createdAt":"2021-03-14T00:38:54.000Z","updatedAt":"2021-03-14T00:38:54.000Z"},{"id":2,"title":"testing","description":"testing238912378123","username":"skyrossm","createdAt":"2021-03-14T00:42:22.000Z","updatedAt":"2021-03-14T00:42:22.000Z"}]');
         await PostsDataService.delete(payload);
         actions.deletePost(payload);
     }),
@@ -138,6 +138,10 @@ const MainStore = createStore({
     createComment: thunk(async (actions, payload) => {
         const data = await CommentsDataService.create(payload);
         return data.data;
+    }),
+
+    removeComment: thunk(async (actions, payload) => {
+        await CommentsDataService.delete(payload);
     }),
 
     getCommentsForPost: thunk(async (actions, postId) => {

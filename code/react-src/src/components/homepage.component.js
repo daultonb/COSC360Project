@@ -9,11 +9,17 @@ import Posts from './posts.component';
 function Homepage() {
     const fetchN = useStoreActions((actions) => actions.fetchNPosts);
     const fetchTotal = useStoreActions((actions) => actions.fetchTotal);
+
+    const [total, setTotal] = useState(0);
+
     const [hasMore, setHasMore] = useState(true);
     const n = 5;
     const [numPosts, setNumPosts] = useState(n);
-    const total = useStoreState((state) => state.total);
+
+    const [lastTotal, setLastTotal] = useState(total);
+
     const postHeight = 5;
+
     const topRef = useRef();
 
     function jumpFunction(){
@@ -32,10 +38,23 @@ function Homepage() {
         }
     }
     
-    useEffect(() => {
-        fetchTotal();
+    useEffect(async () => {
+        const total = await fetchTotal();
+        setLastTotal(total);
+        setTotal(total);
         setNumPosts(n);
+        setInterval(async () => { 
+            setTotal(await fetchTotal());
+        }, 60000);
     }, []);
+
+    useEffect(() => {
+        if (total !== lastTotal) {
+            setLastTotal(total);
+            fetchN(numPosts);
+            alert("New posts found!");
+        }
+    }, [total]);
 
     useEffect(() => {
         fetchN(numPosts);

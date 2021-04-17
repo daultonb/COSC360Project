@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled';
-import { useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 import Moment from 'react-moment';
 import { useHistory } from 'react-router-dom';
-import Hyperlink from './hyperlink.component';
+import Button from './button.component';
 
 /** @jsxImportSource @emotion/react */
 
@@ -35,7 +35,10 @@ const ViewLink = styled.span`
     }
 `;
 
-function Comment({comment, showPostLink}) {
+function Comment({comment, showPostLink, hasAccess, deleteCallback}) {
+
+    const deleteComment = useStoreActions((actions) => actions.removeComment);
+
     const history = useHistory();
 
     const userRedirect = (username) => {
@@ -44,6 +47,16 @@ function Comment({comment, showPostLink}) {
 
     const redirect = (postId) => {
         history.push(`/post/${postId}`);
+    }
+
+    const attemptDelete = async () => {
+        if (!hasAccess()) {
+            return;
+        }
+        const confirmed = window.confirm("Are you sure you want to delete this?");
+        if(!confirmed) return;
+        await deleteComment(comment.id)
+        deleteCallback();
     }
 
     const mimeType = comment?.data?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
@@ -58,8 +71,12 @@ function Comment({comment, showPostLink}) {
                     &nbsp;- <ViewLink onClick={e=> redirect(comment.post_id)}>View Post</ViewLink>
                 </span> 
             )}
+            {hasAccess && (
+                <Button onClick={attemptDelete} float="right" text={"Remove"}></Button>
+            )}
             <CommentBody>
                 {commentMedia}
+                &nbsp;
                 {comment.text}
             </CommentBody>
         </CommentContent>
