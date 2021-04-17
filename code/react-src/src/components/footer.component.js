@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Navi = styled.nav`
     background-color: #222831;
-    height: 6vh;
+    height: 6vmin;
     width: 99vw;
     bottom: 0;
     color: grey;
@@ -14,24 +14,23 @@ const Navi = styled.nav`
 
 const GridCont = styled.div`
     display: grid;
-    grid-template-columns: 0.2fr 0.2fr;
+    grid-template-columns: 48vw 48vw;
     text-align: center;
     font-size: 1.8vmin;
-    grid-gap: 66vw;
-    padding-top: 0.5vh;
-    min-width: 100%;
+    grid-gap: 3vw;
+    
 `;
 
 //Text
 const GridItem1 = styled.div`
     align-content: center;
     text-align: center;
-    width: 10vw;
+    width: 15vw;
+    height:5vh;
 `;
 const GridItem2 = styled.div`
-    align-content: center;
     text-align: center;
-    width: 22vw;
+    height:5vh;
 `;
 
 function Footer() {
