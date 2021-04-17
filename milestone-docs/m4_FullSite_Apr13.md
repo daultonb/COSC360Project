@@ -34,4 +34,4 @@
 > 10% is reserved for deployment, client and server-side unit testing
 >  **(if you do not test or deploy the maximum you can get out of this section is 25/35).**
 
-- [ ] Status: WIP, Assigned to: Ross
+- [x] Status: WIP, Assigned to: Ross
