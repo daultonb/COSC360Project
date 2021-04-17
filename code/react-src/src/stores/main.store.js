@@ -11,11 +11,11 @@ const MainStore = createStore({
     total: 0,
     genreList: [
         {key: "generic", name: "Generic", description: "Games other than the ones specified below.", colorCode: "#000000"},
-        {key: "csgo", name: "Counter Strike: Global Offensive", description: "Tactical FPS Shooter, Team-based, Realism, Skin Trading", colorCode: "#666"},
+        {key: "csgo", name: "Counter Strike: Global Offensive", description: "Tactical FPS, Team-based, Realism, Skin Trading", colorCode: "#666"},
         {key: "ow", name: "Overwatch", description: "Cartoony Team-based FPS, Role Selection and Arcade modes", colorCode: "#f49d50"},
         {key: "lol", name: "League of Legends", description: "5v5 Arena Battle, Team-based, Role Selection", colorCode: "#65bb5e"},
         {key: "rl", name: "Rocket League", description: "Like soccer but with cars.", colorCode: "#2f76e3"},
-        {key: "val", name: "Valorant", description: "Tactical FPS Shooter, Team-based, has the artstyle of Overwatch but gameplay of Counter Strike", colorCode: "#f93434"},
+        {key: "val", name: "Valorant", description: "Tactical FPS, Team-based, has the artstyle of Overwatch but gameplay of Counter Strike", colorCode: "#f93434"},
     ],
 
     addPost: action((state, payload) => {
