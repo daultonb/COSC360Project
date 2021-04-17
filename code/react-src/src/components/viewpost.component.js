@@ -148,6 +148,9 @@ function ViewPost() {
         }
         setPost(await fetchPost(Number(postId)));
         setComments(await fetchComments(Number(postId)));
+        setInterval(async () => {
+            setComments(await fetchComments(Number(postId)));
+        }, 60000)
     }, []);
 
     const mimeType = post?.data?.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
